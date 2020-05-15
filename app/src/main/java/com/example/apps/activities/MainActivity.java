@@ -49,4 +49,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public FirebaseAuth getfAuth() {
+        return fAuth;
+    }
 }

@@ -9,7 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.AddProduct" />
-        <activity android:name=".activities.AddList" />
+        <activity android:name=".activities.AddList"
+            android:parentActivityName=".activities.FirstActivity"> </activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

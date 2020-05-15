@@ -18,6 +18,11 @@ public class AddList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_list);
+
+
+        getSupportActionBar().setTitle("Add Shopping List");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         editText = findViewById(R.id.EditTextAddList);
         button = findViewById(R.id.buttonAddList);
         button.setOnClickListener(new View.OnClickListener() {

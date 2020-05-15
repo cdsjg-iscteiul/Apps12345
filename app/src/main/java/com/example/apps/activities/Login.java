@@ -25,10 +25,6 @@ public class Login extends AppCompatActivity {
     FirebaseAuth fAuth;
 
 
-    public FirebaseAuth getfAuth() {
-        return fAuth;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

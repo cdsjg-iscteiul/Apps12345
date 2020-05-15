@@ -64,7 +64,7 @@ public class FirstActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.addCart:
-                items.add(items.size(), new item(R.drawable.ic_shopping, "Lista de Compras ",null,new ArrayList<ProductsToBuy>()));
+                startActivity(new Intent(FirstActivity.this, AddList.class));
                 mAdapter.notifyItemInserted(items.size());
                 return true;
 

@@ -18,12 +18,12 @@ public class item {
 
         Log.d("Carlos" , mText1);
 
-        if(mText1.equals("Lista de Compras ")){
+        if(arrayComprar != null){
             Log.d("Carlos" , mText1);
             array1= arrayComprar;
             mText2=  String.valueOf(arrayComprar.size());
         }
-        else{
+        if(arrayComprados != null){
             array2= arrayComprados;
             mText2=  String.valueOf(arrayComprados.size());
         }

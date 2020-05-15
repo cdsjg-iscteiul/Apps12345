@@ -26,7 +26,7 @@ public class FirstActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     private ArrayList<item> items;
-    private Login fAuth;
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,8 @@ public class FirstActivity extends AppCompatActivity {
                 return true;
 
             case R.id.item2:
-                fAuth.getfAuth().signOut();
+                fAuth = FirebaseAuth.getInstance();
+                fAuth.signOut();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
                 break;

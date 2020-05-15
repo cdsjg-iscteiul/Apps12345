@@ -16,10 +16,7 @@ public class item {
         mImageResource = imagem;
         mText1 = texto1;
 
-        Log.d("Carlos" , mText1);
-
         if(arrayComprar != null){
-            Log.d("Carlos" , mText1);
             array1= arrayComprar;
             mText2=  String.valueOf(arrayComprar.size());
         }

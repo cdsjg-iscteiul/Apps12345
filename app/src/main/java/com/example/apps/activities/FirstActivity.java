@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.apps.utility.Adapter;
 import com.example.apps.items.BoughtProduct;
@@ -37,7 +38,6 @@ public class FirstActivity extends AppCompatActivity {
         createList();
         buildRecyclerView();
 
-
     }
 
     public void createList(){
@@ -60,12 +60,25 @@ public class FirstActivity extends AppCompatActivity {
         return true;
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                String text = data.getStringExtra("ListName");
+                Toast.makeText(FirstActivity.this, text, Toast.LENGTH_SHORT).show();
+                items.add(items.size(), new item(R.drawable.ic_shopping,text,null ,new ArrayList<ProductsToBuy>()));
+                mAdapter.notifyItemInserted(items.size());
+            }
+        }
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.addCart:
-                startActivity(new Intent(FirstActivity.this, AddList.class));
-                mAdapter.notifyItemInserted(items.size());
+                Intent intent = new Intent(FirstActivity.this, AddList.class);
+                startActivityForResult(intent,1);
                 return true;
 
             case R.id.addCabinet:

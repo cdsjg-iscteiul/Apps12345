@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.apps.R;
 
@@ -36,10 +37,10 @@ public class AddList extends AppCompatActivity {
     }
 
     private void changeActivity() {
-        Intent intent = new Intent(this, FirstActivity.class);//por aqui a ativity
-        intent.putExtra("ListName",editText.getText());
+        Intent intent = new Intent();//por aqui a ativit
+        intent.putExtra("ListName",editText.getText().toString());
         setResult(RESULT_OK,intent);
-        startActivityForResult(intent,2);
         finish();
     }
+
 }

@@ -24,16 +24,21 @@ public class Login extends AppCompatActivity {
     Button login;
     FirebaseAuth fAuth;
 
+
+    public FirebaseAuth getfAuth() {
+        return fAuth;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         fAuth=FirebaseAuth.getInstance();
 
-        /*
-        if(fAuth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(), FirstActivity.class));
-        }*/
+
+       // if(fAuth.getCurrentUser()!=null){
+       //     startActivity(new Intent(getApplicationContext(), FirstActivity.class));
+       // }
 
         email = (EditText) findViewById(R.id.etEmail);
         password =(EditText)findViewById(R.id.etPassword);
@@ -72,5 +77,7 @@ public class Login extends AppCompatActivity {
 
 
     }
+
+
 
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +16,7 @@ import com.example.apps.items.BoughtProduct;
 import com.example.apps.items.ProductsToBuy;
 import com.example.apps.R;
 import com.example.apps.items.item;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -24,6 +26,7 @@ public class FirstActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     private ArrayList<item> items;
+    private Login fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +73,16 @@ public class FirstActivity extends AppCompatActivity {
                 mAdapter.notifyItemInserted(items.size());
                 return true;
 
+            case R.id.item2:
+                fAuth.getfAuth().signOut();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+                break;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return  true;
     }
 }
 

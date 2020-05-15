@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apps.activities.AddProduct;
+
 public class MainActivity extends AppCompatActivity {
     private Button button;
     private Boolean s;
@@ -20,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button =  (Button) findViewById(R.id.button2);
+        button =  findViewById(R.id.button2);
         textView = findViewById(R.id.textView);
         s=false;
         button.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        assert data != null;
         text=data.getStringExtra("ListName");
         Toast.makeText(MainActivity.this, "text", Toast.LENGTH_SHORT).show();
         textView.setText(text);
@@ -45,13 +48,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void change() {
-        Intent intent = new Intent(this,AddList.class);
+        Intent intent = new Intent(this, AddProduct.class);
+        /*
         if(!s)
         {
             Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
             s=true;
         }
         else
+
+         */
             startActivityForResult(intent,1);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.apps;
+package com.example.apps.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.example.apps.MainActivity;
+import com.example.apps.R;
 
 public class AddList extends AppCompatActivity {
     private Button button;
@@ -17,8 +19,8 @@ public class AddList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_list);
-        editText = findViewById(R.id.EditText1);
-        button = (Button) findViewById(R.id.button1);
+        editText = findViewById(R.id.EditTextAddList);
+        button = findViewById(R.id.buttonAddList);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,10 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AddList">
+    tools:context=".activities.AddProduct">
 
     <TextView
-        android:id="@+id/textViewAddList"
+        android:id="@+id/textViewAddProduct2"
+        android:layout_width="124dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/amount"
+        android:textSize="30sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAddProduct"
+        app:layout_constraintVertical_bias="0.07" />
+
+    <TextView
+        android:id="@+id/textViewAddProduct"
         android:layout_width="91dp"
         android:layout_height="51dp"
         android:layout_alignParentStart="true"
@@ -25,7 +43,7 @@
         app:layout_constraintVertical_bias="0.129" />
 
     <EditText
-        android:id="@+id/EditTextAddList"
+        android:id="@+id/EditTextAddProduct"
         android:layout_width="267dp"
         android:layout_height="53dp"
         android:layout_alignParentTop="true"
@@ -40,13 +58,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.384"
-        app:layout_constraintStart_toEndOf="@+id/textViewAddList"
+        app:layout_constraintStart_toEndOf="@+id/textViewAddProduct"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.129"
         tools:visibility="visible" />
 
     <Button
-        android:id="@+id/buttonAddList"
+        android:id="@+id/buttonAddProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -62,5 +80,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.708"
         tools:ignore="RelativeOverlap" />
+
+    <NumberPicker
+        android:id="@+id/numberpickeraddproduct"
+        android:layout_width="95dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toEndOf="@+id/textViewAddProduct2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.228"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,11 +19,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ExampleViewHolder> {
 
         public ImageView mImageView;
         public TextView mText1;
+        public TextView mtext2;
 
         public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.imageView);
             mText1 = itemView.findViewById(R.id.text1);
+            mtext2 = itemView.findViewById(R.id.text2);
 
         }
     }
@@ -46,6 +48,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ExampleViewHolder> {
 
         holder.mImageView.setImageResource(current.getmImageResource());
         holder.mText1.setText(current.getmText1());
+        holder.mtext2.setText("Número de produtos na lista: " + current.getmText2());
     }
 
     @Override

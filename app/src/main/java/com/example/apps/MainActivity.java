@@ -55,12 +55,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.addCart:
-                items.add(items.size(), new item(R.drawable.ic_shopping, "Lista de Compras "));
+                items.add(items.size(), new item(R.drawable.ic_shopping, "Lista de Compras ",null,new ArrayList<ProdutoComprar>()));
                 mAdapter.notifyItemInserted(items.size());
                 return true;
 
             case R.id.addCabinet:
-                items.add(items.size(), new item(R.drawable.ic_office_material, "Guardar Produtos"));
+                items.add(items.size(), new item(R.drawable.ic_office_material, "Guardar Produtos",new ArrayList<ProdutoComprado>(),null));
                 mAdapter.notifyItemInserted(items.size());
                 return true;
 

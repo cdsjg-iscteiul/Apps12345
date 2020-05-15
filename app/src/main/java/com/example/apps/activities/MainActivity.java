@@ -11,8 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.apps.Adapter;
-import com.example.apps.ProdutoComprado;
-import com.example.apps.ProdutoComprar;
+import com.example.apps.BoughtProduct;
+import com.example.apps.ProductsToBuy;
 import com.example.apps.R;
 import com.example.apps.item;
 
@@ -61,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.addCart:
-                items.add(items.size(), new item(R.drawable.ic_shopping, "Lista de Compras ",null,new ArrayList<ProdutoComprar>()));
+                items.add(items.size(), new item(R.drawable.ic_shopping, "Lista de Compras ",null,new ArrayList<ProductsToBuy>()));
                 mAdapter.notifyItemInserted(items.size());
                 return true;
 
             case R.id.addCabinet:
-                items.add(items.size(), new item(R.drawable.ic_office_material, "Guardar Produtos",new ArrayList<ProdutoComprado>(),null));
+                items.add(items.size(), new item(R.drawable.ic_office_material, "Guardar Produtos",new ArrayList<BoughtProduct>(),null));
                 mAdapter.notifyItemInserted(items.size());
                 return true;
 

@@ -8,11 +8,11 @@ public class item {
     private int mImageResource;
     private String mText1;
     private String mText2;
-    private ArrayList<ProdutoComprar> array1;
-    private ArrayList<ProdutoComprado> array2;
+    private ArrayList<ProductsToBuy> array1;
+    private ArrayList<BoughtProduct> array2;
 
 
-    public item(int imagem, String texto1,ArrayList<ProdutoComprado> arrayComprados, ArrayList<ProdutoComprar> arrayComprar) {
+    public item(int imagem, String texto1, ArrayList<BoughtProduct> arrayComprados, ArrayList<ProductsToBuy> arrayComprar) {
         mImageResource = imagem;
         mText1 = texto1;
 
@@ -41,11 +41,11 @@ public class item {
         return mText2;
     }
 
-    public ArrayList<ProdutoComprado> getArray2() {
+    public ArrayList<BoughtProduct> getArray2() {
         return array2;
     }
 
-    public ArrayList<ProdutoComprar> getArray1() {
+    public ArrayList<ProductsToBuy> getArray1() {
         return array1;
     }
 }

@@ -2,7 +2,7 @@ package com.example.apps;
 
 import androidx.annotation.NonNull;
 
-public class ProdutoComprar {
+public class ProductsToBuy {
 
     private String nome;
     private String quantidade;

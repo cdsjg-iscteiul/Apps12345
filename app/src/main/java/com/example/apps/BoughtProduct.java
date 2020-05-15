@@ -1,6 +1,6 @@
 package com.example.apps;
 
-public class ProdutoComprado {
+public class BoughtProduct {
 
     private String nome;
     private String quantidade;

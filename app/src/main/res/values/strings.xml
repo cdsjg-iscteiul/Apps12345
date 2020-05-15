@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Apps</string>
+    <string name="name">Name:</string>
+    <string name="add">ADD</string>
+    <string name="new_list_name">New List name</string>
+    <string name="amount">Amount:</string>
 </resources>

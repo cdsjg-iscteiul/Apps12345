@@ -1,4 +1,4 @@
-package com.example.apps;
+package com.example.apps.items;
 
 public class BoughtProduct {
 

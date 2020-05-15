@@ -1,4 +1,4 @@
-package com.example.apps;
+package com.example.apps.utility;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.apps.R;
+import com.example.apps.items.item;
 
 import java.util.ArrayList;
 

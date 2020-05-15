@@ -10,11 +10,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.apps.Adapter;
-import com.example.apps.BoughtProduct;
-import com.example.apps.ProductsToBuy;
+import com.example.apps.utility.Adapter;
+import com.example.apps.items.BoughtProduct;
+import com.example.apps.items.ProductsToBuy;
 import com.example.apps.R;
-import com.example.apps.item;
+import com.example.apps.items.item;
 
 import java.util.ArrayList;
 

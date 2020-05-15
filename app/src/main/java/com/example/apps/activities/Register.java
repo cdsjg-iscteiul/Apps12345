@@ -74,7 +74,7 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             database.getReference().child(fAuth.getUid()).setValue(user);
-                            startActivity(new Intent(Register.this, MainActivity.class));
+                            startActivity(new Intent(Register.this, FirstActivity.class));
                         } else {
                             Toast.makeText(Register.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                         }

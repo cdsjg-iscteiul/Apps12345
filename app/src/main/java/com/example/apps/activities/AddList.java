@@ -31,7 +31,7 @@ public class AddList extends AppCompatActivity {
     }
 
     private void changeActivity() {
-        Intent intent = new Intent(this, MainActivity.class);//por aqui a ativity
+        Intent intent = new Intent(this, FirstActivity.class);//por aqui a ativity
         intent.putExtra("ListName",editText.getText());
         setResult(RESULT_OK,intent);
         startActivityForResult(intent,2);

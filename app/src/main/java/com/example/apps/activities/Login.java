@@ -30,9 +30,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         fAuth=FirebaseAuth.getInstance();
 
+        /*
         if(fAuth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        }
+            startActivity(new Intent(getApplicationContext(), FirstActivity.class));
+        }*/
 
         email = (EditText) findViewById(R.id.etEmail);
         password =(EditText)findViewById(R.id.etPassword);
@@ -62,7 +63,7 @@ public class Login extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(Login.this, "Success", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Login.this, MainActivity.class));
+                    startActivity(new Intent(Login.this, FirstActivity.class));
                 }else{
                     Toast.makeText(Login.this, "ERROR", Toast.LENGTH_SHORT).show();
                 }

@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.apps.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     Button login;
     Button signIn;
+    FirebaseAuth fAuth;
 
 
 
@@ -22,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
+
+        fAuth = FirebaseAuth.getInstance();
+        if(fAuth.getCurrentUser()!=null){
+            startActivity(new Intent(getApplicationContext(), FirstActivity.class));
+        }
         login = findViewById(R.id.btnlogin);
         signIn = findViewById(R.id.btnsignin);
 

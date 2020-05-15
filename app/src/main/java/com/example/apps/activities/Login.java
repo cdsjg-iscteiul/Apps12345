@@ -36,9 +36,7 @@ public class Login extends AppCompatActivity {
         fAuth=FirebaseAuth.getInstance();
 
 
-       // if(fAuth.getCurrentUser()!=null){
-       //     startActivity(new Intent(getApplicationContext(), FirstActivity.class));
-       // }
+
 
         email = (EditText) findViewById(R.id.etEmail);
         password =(EditText)findViewById(R.id.etPassword);

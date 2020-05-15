@@ -5,20 +5,24 @@ import androidx.annotation.NonNull;
 public class ProductsToBuy {
 
     private String nome;
-    private String quantidade;
+    private int quantidade;
+    private String tipo;
 
-    public void ProdutoPorComprar(String nome, String quantidade){
+    public void ProductsToBuy(String nome, int quantidade, String tipo){
         this.nome = nome;
         this.quantidade = quantidade;
+        this.tipo = tipo;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public String getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-
+    public String getTipo() {
+        return tipo;
+    }
 }

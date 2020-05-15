@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.apps.MainActivity;
 import com.example.apps.R;
 
 public class AddList extends AppCompatActivity {

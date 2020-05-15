@@ -1,4 +1,4 @@
-package com.example.apps;
+package com.example.apps.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.example.apps.Adapter;
+import com.example.apps.ProdutoComprado;
+import com.example.apps.ProdutoComprar;
+import com.example.apps.R;
+import com.example.apps.item;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.apps;
+package com.example.apps.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.apps.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -30,7 +31,7 @@ public class Login extends AppCompatActivity {
         fAuth=FirebaseAuth.getInstance();
 
         if(fAuth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(), SecondActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
         email = (EditText) findViewById(R.id.etEmail);
@@ -61,7 +62,7 @@ public class Login extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(Login.this, "Success", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Login.this, SecondActivity.class));
+                    startActivity(new Intent(Login.this, MainActivity.class));
                 }else{
                     Toast.makeText(Login.this, "ERROR", Toast.LENGTH_SHORT).show();
                 }

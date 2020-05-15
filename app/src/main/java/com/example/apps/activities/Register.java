@@ -1,4 +1,4 @@
-package com.example.apps;
+package com.example.apps.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.apps.R;
+import com.example.apps.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -72,7 +74,7 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             database.getReference().child(fAuth.getUid()).setValue(user);
-                            startActivity(new Intent(Register.this, SecondActivity.class));
+                            startActivity(new Intent(Register.this, MainActivity.class));
                         } else {
                             Toast.makeText(Register.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                         }

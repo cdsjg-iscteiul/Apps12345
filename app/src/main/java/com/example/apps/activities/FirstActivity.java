@@ -63,6 +63,9 @@ public class FirstActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.test:
+                startActivity(new Intent(getApplicationContext(), ShoppingList.class));
+                return true;
             case R.id.addCart:
                 items.add(items.size(), new item(R.drawable.ic_shopping, "Lista de Compras ",null,new ArrayList<ProductsToBuy>()));
                 mAdapter.notifyItemInserted(items.size());

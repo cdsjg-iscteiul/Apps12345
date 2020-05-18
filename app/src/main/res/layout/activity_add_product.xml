@@ -43,14 +43,12 @@
         app:layout_constraintVertical_bias="0.129" />
 
     <EditText
-        android:id="@+id/EditTextAddProduct"
+        android:id="@+id/editTextAddProduct"
         android:layout_width="267dp"
         android:layout_height="53dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-
-
         android:autofillHints=""
         android:hint="@string/new_list_name"
         android:inputType="text"
@@ -83,12 +81,25 @@
 
     <NumberPicker
         android:id="@+id/numberpickeraddproduct"
-        android:layout_width="95dp"
-        android:layout_height="113dp"
+        android:layout_width="72dp"
+        android:layout_height="109dp"
         android:layout_marginStart="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewAddProduct2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.228"
+        tools:visibility="visible" />
+
+    <NumberPicker
+        android:id="@+id/typeofproduct"
+        android:layout_width="63dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.707"
         app:layout_constraintStart_toEndOf="@+id/textViewAddProduct2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.228"

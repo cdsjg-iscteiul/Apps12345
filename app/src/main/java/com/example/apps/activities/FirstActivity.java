@@ -76,6 +76,14 @@ public class FirstActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.test:
+                startActivity(new Intent(getApplicationContext(), ShoppingList.class));
+                return true;
+
+            case R.id.testMaria:
+                startActivityForResult(new Intent(getApplicationContext(), Storage.class),1);
+                return true;
+
             case R.id.addCart:
                 Intent intent = new Intent(FirstActivity.this, AddList.class);
                 startActivityForResult(intent,1);
@@ -86,12 +94,16 @@ public class FirstActivity extends AppCompatActivity {
                 mAdapter.notifyItemInserted(items.size());
                 return true;
 
+
             case R.id.item2:
                 fAuth = FirebaseAuth.getInstance();
                 fAuth.signOut();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
                 break;
+
+
+
 
             default:
                 return super.onOptionsItemSelected(item);

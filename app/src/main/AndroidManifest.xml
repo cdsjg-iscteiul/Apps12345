@@ -8,6 +8,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.Storage"></activity>
+        <activity android:name=".activities.ShoppingList" />
+        <activity android:name=".activities.AddProductMaria" />
         <activity android:name=".activities.AddProduct" />
         <activity android:name=".activities.AddList"
             android:parentActivityName=".activities.FirstActivity"> </activity>
@@ -18,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.FirstActivity"/>
+        <activity android:name=".activities.FirstActivity" />
         <activity android:name=".activities.Login" />
         <activity android:name=".activities.Register" />
     </application>

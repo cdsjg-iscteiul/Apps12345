@@ -1,6 +1,5 @@
 package com.example.apps.activities;
 
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,71 +12,51 @@ import android.view.View;
 
 import com.example.apps.R;
 import com.example.apps.items.Product;
+import com.example.apps.utility.Adap;
 import com.example.apps.utility.CardConstructer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class ShoppingList extends AppCompatActivity {
+public class Storage extends AppCompatActivity {
 
-    private ArrayList<Product> shoppingList;
+    private ArrayList<Product> storageList;
     private RecyclerView recyclerview;
-    private CardConstructer adapter;
+    private Adap adapter;
     private RecyclerView.LayoutManager layoutManager;
     private FloatingActionButton floatingActionButton;
-    private FloatingActionButton temporario; //PARA ELEMINAR ERA SO PARA TESTE
+    private FloatingActionButton temporario; //PARA ELIMINAR ERA SO PARA TESTE
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shopping_list);
+        setContentView(R.layout.activity_storage);
 
-        floatingActionButton = findViewById(R.id.floatingActionButton);
+        floatingActionButton = findViewById(R.id.floatingActionButtonM);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getApplicationContext(), AddProduct.class),1);
+                startActivityForResult(new Intent(getApplicationContext(), AddProductMaria.class),1);
             }
         });
 
-        temporario = findViewById(R.id.floatingActionButton2);
-        temporario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count=0;
-                for(Product p:shoppingList){
-                    if(p.isChecked())
-                        count++;
-
-                }
-                Log.e("OLAAAAAAAAAAAAAA",""+count);
-            }
-        });
-
-        shoppingList = new ArrayList<>();
-        recyclerview = findViewById(R.id.recyclerView2);
+        storageList = new ArrayList<>();
+        recyclerview = findViewById(R.id.recyclerViewM);
         recyclerview.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        adapter = new CardConstructer(shoppingList);
+        adapter = new Adap(storageList);
+
 
         recyclerview.setLayoutManager(layoutManager);
         recyclerview.setAdapter(adapter);
-
     }
     @Override
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data) {
-        shoppingList.add(shoppingList.size(), (Product) data.getSerializableExtra("ProductAdded"));
-        adapter.notifyItemInserted(shoppingList.size());
+        storageList.add(storageList.size(), (Product) data.getSerializableExtra("ProductAdded"));
+        adapter.notifyItemInserted(storageList.size());
         super.onActivityResult(requestCode, resultCode, data);
 
     }
-
 }
-
-
-
-
-
-

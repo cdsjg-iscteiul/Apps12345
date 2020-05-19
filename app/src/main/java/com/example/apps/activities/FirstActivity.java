@@ -66,6 +66,11 @@ public class FirstActivity extends AppCompatActivity {
             case R.id.test:
                 startActivity(new Intent(getApplicationContext(), ShoppingList.class));
                 return true;
+
+            case R.id.testMaria:
+                startActivityForResult(new Intent(getApplicationContext(), Storage.class),1);
+                return true;
+
             case R.id.addCart:
                 items.add(items.size(), new item(R.drawable.ic_shopping, "Lista de Compras ",null,new ArrayList<ProductsToBuy>()));
                 mAdapter.notifyItemInserted(items.size());
@@ -76,12 +81,16 @@ public class FirstActivity extends AppCompatActivity {
                 mAdapter.notifyItemInserted(items.size());
                 return true;
 
+
             case R.id.item2:
                 fAuth = FirebaseAuth.getInstance();
                 fAuth.signOut();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
                 break;
+
+
+
 
             default:
                 return super.onOptionsItemSelected(item);

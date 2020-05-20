@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class FirstActivity extends AppCompatActivity {
 
     private RecyclerView mRecycler;
-    private RecyclerView.Adapter mAdapter;
+    private Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     private ArrayList<item> items;
     FirebaseAuth fAuth;
@@ -51,6 +51,22 @@ public class FirstActivity extends AppCompatActivity {
         mAdapter = new Adapter(items);
         mRecycler.setLayoutManager(mManager);
         mRecycler.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                if(items.get(position).getArray1()!= null) {
+                    startActivity(new Intent(getApplicationContext(), ShoppingList.class));
+                }
+
+                if(items.get(position).getArray2()!= null) {
+                    startActivity(new Intent(getApplicationContext(), Storage.class));
+                }
+
+
+            }
+        });
     }
 
     @Override
@@ -70,30 +86,29 @@ public class FirstActivity extends AppCompatActivity {
                 mAdapter.notifyItemInserted(items.size());
             }
         }
+
+        if(requestCode == 2){
+            if (resultCode == RESULT_OK) {
+                String text = data.getStringExtra("ListName");
+                Toast.makeText(FirstActivity.this, text, Toast.LENGTH_SHORT).show();
+                items.add(items.size(), new item(R.drawable.ic_office_material,text,new ArrayList<BoughtProduct>() ,null));
+                mAdapter.notifyItemInserted(items.size());
+            }
+        }
     }
 
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.test:
-                startActivity(new Intent(getApplicationContext(), ShoppingList.class));
-                return true;
-
-            case R.id.testMaria:
-                startActivityForResult(new Intent(getApplicationContext(), Storage.class),1);
-                return true;
-
             case R.id.addCart:
                 Intent intent = new Intent(FirstActivity.this, AddList.class);
                 startActivityForResult(intent,1);
                 return true;
 
             case R.id.addCabinet:
-                items.add(items.size(), new item(R.drawable.ic_office_material, "Guardar Produtos",new ArrayList<BoughtProduct>(),null));
-                mAdapter.notifyItemInserted(items.size());
+                startActivityForResult(new Intent(getApplicationContext(), AddList.class),2);
                 return true;
-
 
             case R.id.item2:
                 fAuth = FirebaseAuth.getInstance();
@@ -101,8 +116,6 @@ public class FirstActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
                 break;
-
-
 
 
             default:

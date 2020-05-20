@@ -12,13 +12,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.apps.items.Product;
 import com.example.apps.utility.Adapter;
-import com.example.apps.items.BoughtProduct;
-import com.example.apps.items.ProductsToBuy;
 import com.example.apps.R;
 import com.example.apps.items.item;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class FirstActivity extends AppCompatActivity {
@@ -57,7 +57,12 @@ public class FirstActivity extends AppCompatActivity {
             public void onItemClick(int position) {
 
                 if(items.get(position).getArray1()!= null) {
-                    startActivity(new Intent(getApplicationContext(), ShoppingList.class));
+                    ArrayList<Object> object = new ArrayList<Object>();
+                    Intent intent = new Intent(FirstActivity.this, ShoppingList.class);
+                    Bundle args = new Bundle();
+                    args.putSerializable("ARRAYLIST",(Serializable)object);
+                    intent.putExtra("BUNDLE",args);
+                    startActivity(intent);
                 }
 
                 if(items.get(position).getArray2()!= null) {
@@ -82,7 +87,7 @@ public class FirstActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK) {
                 String text = data.getStringExtra("ListName");
                 Toast.makeText(FirstActivity.this, text, Toast.LENGTH_SHORT).show();
-                items.add(items.size(), new item(R.drawable.ic_shopping,text,null ,new ArrayList<ProductsToBuy>()));
+                items.add(items.size(), new item(R.drawable.ic_shopping,text,null ,new ArrayList<Product>()));
                 mAdapter.notifyItemInserted(items.size());
             }
         }
@@ -91,7 +96,7 @@ public class FirstActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 String text = data.getStringExtra("ListName");
                 Toast.makeText(FirstActivity.this, text, Toast.LENGTH_SHORT).show();
-                items.add(items.size(), new item(R.drawable.ic_office_material,text,new ArrayList<BoughtProduct>() ,null));
+                items.add(items.size(), new item(R.drawable.ic_office_material,text,new ArrayList<Product>() ,null));
                 mAdapter.notifyItemInserted(items.size());
             }
         }

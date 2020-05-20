@@ -56,7 +56,12 @@ public class ShoppingList extends AppCompatActivity {
             }
         });
 
-        shoppingList = new ArrayList<>();
+
+        Intent intent = getIntent();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        shoppingList = (ArrayList<Product>) args.getSerializable("ARRAYLIST");
+
+
         recyclerview = findViewById(R.id.recyclerView2);
         recyclerview.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);

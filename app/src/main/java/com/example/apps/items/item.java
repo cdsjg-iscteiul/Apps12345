@@ -45,5 +45,7 @@ public class item {
     public ArrayList<ProductsToBuy> getArray1() {
         return array1;
     }
+
+
 }
 

@@ -33,6 +33,7 @@ public class ShoppingList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_list);
 
+
         floatingActionButton = findViewById(R.id.floatingActionButton);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

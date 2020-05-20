@@ -54,6 +54,12 @@ public class FirstActivity extends AppCompatActivity {
 
         mAdapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
             @Override
+            public void onDeleteClick(int position) {
+                items.remove(position);
+                mAdapter.notifyItemRemoved(position);
+            }
+
+            @Override
             public void onItemClick(int position) {
 
                 if(items.get(position).getArray1()!= null) {
@@ -63,6 +69,7 @@ public class FirstActivity extends AppCompatActivity {
                 if(items.get(position).getArray2()!= null) {
                     startActivity(new Intent(getApplicationContext(), Storage.class));
                 }
+
 
 
             }

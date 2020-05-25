@@ -8,24 +8,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.apps.R;
-import com.example.apps.items.Product;
-import com.example.apps.items.item;
+import com.example.apps.items.alreadyBoughtProduct;
 import com.example.apps.utility.Adap;
-import com.example.apps.utility.CardConstructer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class Storage extends AppCompatActivity {
 
-    private ArrayList<Product> storageList;
+    private ArrayList<alreadyBoughtProduct> storageList;
     private RecyclerView recyclerview;
     private Adap adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -52,7 +49,7 @@ public class Storage extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
-        storageList = (ArrayList<Product>) args.getSerializable("ARRAYLIST");
+        //storageList = (ArrayList<alreadyBoughtProduct>) args.getSerializable("ARRAYLIST");
 
         recyclerview = findViewById(R.id.recyclerViewM);
         recyclerview.setHasFixedSize(true);
@@ -65,7 +62,7 @@ public class Storage extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data) {
-        storageList.add(storageList.size(), (Product) data.getSerializableExtra("ProductAdded"));
+        storageList.add(storageList.size(), (alreadyBoughtProduct) data.getSerializableExtra("ProductAdded"));
         adapter.notifyItemInserted(storageList.size());
         super.onActivityResult(requestCode, resultCode, data);
 

@@ -2,6 +2,7 @@ package com.example.apps.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -37,9 +38,10 @@ public class AddList extends AppCompatActivity {
     }
 
     private void changeActivity() {
+
         Intent intent = new Intent();//por aqui a ativit
         intent.putExtra("ListName",editText.getText().toString());
-        setResult(RESULT_OK,intent);
+        setResult(Activity.RESULT_OK, intent);
         finish();
     }
 

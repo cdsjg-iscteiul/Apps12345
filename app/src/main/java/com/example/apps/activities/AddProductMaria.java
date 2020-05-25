@@ -13,10 +13,8 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 
 import com.example.apps.R;
-import com.example.apps.activities.FirstActivity;
-import com.example.apps.items.Product;
+import com.example.apps.items.alreadyBoughtProduct;
 
-import java.sql.Date;
 import java.util.Calendar;
 
 public class AddProductMaria extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
@@ -47,7 +45,7 @@ public class AddProductMaria extends AppCompatActivity implements DatePickerDial
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Product p = new Product(editText.getText().toString(), numberPicker.getValue(), editText2.getText().toString());
+                alreadyBoughtProduct p = new alreadyBoughtProduct(editText.getText().toString(), numberPicker.getValue(), editText2.getText().toString());
                 Intent intent = new Intent(getApplicationContext(),Storage.class);
                 intent.putExtra("ProductAdded", p);
 

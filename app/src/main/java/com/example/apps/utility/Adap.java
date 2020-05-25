@@ -3,21 +3,19 @@ package com.example.apps.utility;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apps.R;
-import com.example.apps.items.Product;
-import com.example.apps.items.item;
+import com.example.apps.items.alreadyBoughtProduct;
 
 import java.util.ArrayList;
 
 public class Adap extends RecyclerView.Adapter<Adap.ExampleViewHolder> {
 
-    private ArrayList<Product> mListaStorage;
+    private ArrayList<alreadyBoughtProduct> mListaStorage;
 
     public  static class ExampleViewHolder extends  RecyclerView.ViewHolder{
 
@@ -34,7 +32,7 @@ public class Adap extends RecyclerView.Adapter<Adap.ExampleViewHolder> {
         }
     }
 
-    public  Adap(ArrayList<Product> lista){
+    public  Adap(ArrayList<alreadyBoughtProduct> lista){
         mListaStorage = lista;
     }
 
@@ -48,7 +46,7 @@ public class Adap extends RecyclerView.Adapter<Adap.ExampleViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
-        Product p = mListaStorage.get(position);
+        alreadyBoughtProduct p = mListaStorage.get(position);
 
         holder.mName.setText(p.getName());
         holder.mText1.setText(""+p.getAmount());

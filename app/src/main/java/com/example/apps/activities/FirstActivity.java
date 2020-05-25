@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.apps.items.Product;
+import com.example.apps.items.alreadyBoughtProduct;
+import com.example.apps.items.toBuyProduct;
 import com.example.apps.utility.Adapter;
 import com.example.apps.R;
 import com.example.apps.items.item;
@@ -21,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -31,13 +31,14 @@ public class FirstActivity extends AppCompatActivity {
     private Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     private ArrayList<item> items;
-    private ArrayList<Product> lista;
+    private int positionTest;
     FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         loadData();
         buildRecyclerView();
@@ -58,25 +59,29 @@ public class FirstActivity extends AppCompatActivity {
             public void onDeleteClick(int position) {
                 items.remove(position);
                 mAdapter.notifyItemRemoved(position);
+                saveData();
             }
 
             @Override
             public void onItemClick(int position) {
-
-                if(items.get(position).getArray1()!= null) {
+                Log.e("TOU ONDE?","-----------> TOU NO ON CLICK" );
+                Log.e("QUE TEM A LISTA?","-----------------------> " + items.get(position).getArrayComprar()  );
+                if(items.get(position).getArrayComprar()!= null) {
+                    Log.e("TOU ONDE?","-----------> TOU NO ON CLICK DO CARRINHO" );
                     Intent intent = new Intent(FirstActivity.this, ShoppingList.class);
-                    Bundle args = new Bundle();
-                    args.putSerializable("ARRAYLIST",(Serializable)items.get(position).getArray1());
-                    intent.putExtra("BUNDLE",args);
+                    intent.putParcelableArrayListExtra("BUNDLE",items.get(position).getArrayComprar());
+                    positionTest = position;
                     startActivityForResult(intent,3);
+
                 }
 
-                if(items.get(position).getArray2()!= null) {
-                    Intent intent = new Intent(FirstActivity.this, Storage.class);
-                    Bundle args = new Bundle();
-                    args.putSerializable("ARRAYLIST",(Serializable)items.get(position).getArray2());
-                    intent.putExtra("BUNDLE",args);
+                if(items.get(position).getArrayComprados()!= null) {
+                    Log.e("TOU ONDE?","-----------> TOU NO ON CLICK DA PASTA" );
+                    /*Intent intent = new Intent(FirstActivity.this, Storage.class);
+                    intent.putParcelableArrayListExtra("BUNDLE",items.get(position).getArray2());
+                    positionTest = position;
                     startActivityForResult(intent,4);
+                     */
                 }
 
 
@@ -92,12 +97,13 @@ public class FirstActivity extends AppCompatActivity {
         return true;
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data, int position) {
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
                 String text = data.getStringExtra("ListName");
-                items.add(items.size(), new item(R.drawable.ic_shopping,text,null ,new ArrayList<Product>()));
+                items.add(items.size(), new item(R.drawable.ic_shopping,text,null ,new ArrayList<toBuyProduct>()));
                 mAdapter.notifyItemInserted(items.size());
                 saveData();
             }
@@ -106,27 +112,34 @@ public class FirstActivity extends AppCompatActivity {
         if(requestCode == 2){
             if (resultCode == RESULT_OK) {
                 String text = data.getStringExtra("ListName");
-                items.add(items.size(), new item(R.drawable.ic_office_material,text,new ArrayList<Product>() ,null));
+                items.add(items.size(), new item(R.drawable.ic_office_material,text,new ArrayList<alreadyBoughtProduct>() ,null));
                 mAdapter.notifyItemInserted(items.size());
                 saveData();
             }
         }
 
+
         if(requestCode == 3){
-            Intent intent = getIntent();
-            Bundle args = intent.getBundleExtra("BUNDLE");
-            lista = (ArrayList<Product>) args.getSerializable("ARRAYLIST");
-            items.get(position).setArray1(lista);
-            saveData();
+            if (resultCode == RESULT_OK) {
+                ArrayList<toBuyProduct> lista = data.getParcelableArrayListExtra("RESULTS");
+                Log.e("RECEBI ESTA MERDA", lista.toString());
+                items.get(positionTest).setArray2(lista);
+                saveData();
+                mAdapter.notifyDataSetChanged();
+            }
         }
 
         if(requestCode ==4){
-            Intent intent = getIntent();
-            Bundle args = intent.getBundleExtra("BUNDLE");
-            lista = (ArrayList<Product>) args.getSerializable("ARRAYLIST");
-            items.get(position).setArray2(lista);
-            saveData();
+            if (resultCode == RESULT_OK) {
+                ArrayList<alreadyBoughtProduct> lista = data.getParcelableArrayListExtra("RESULTS");
+                Log.e("RECEBI ESTA MERDA", lista.toString());
+                items.get(positionTest).setArray1(lista);
+                saveData();
+                mAdapter.notifyDataSetChanged();
+            }
         }
+
+
 
     }
 
@@ -169,7 +182,6 @@ public class FirstActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
                 break;
-
 
             default:
                 return super.onOptionsItemSelected(item);

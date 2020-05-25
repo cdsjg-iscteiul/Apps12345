@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,18 +17,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.apps.R;
-import com.example.apps.items.Product;
-import com.example.apps.items.item;
+import com.example.apps.items.toBuyProduct;
 import com.example.apps.utility.CardConstructer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ShoppingList extends AppCompatActivity {
 
-    private ArrayList<Product> shoppingList;
+    private ArrayList<toBuyProduct> shoppingList;
     private RecyclerView recyclerview;
     private CardConstructer adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -48,7 +46,7 @@ public class ShoppingList extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getApplicationContext(), AddProduct.class),1);
+                startActivityForResult(new Intent(ShoppingList.this, AddProduct.class),45);
             }
         });
 
@@ -57,7 +55,7 @@ public class ShoppingList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int count=0;
-                for(Product p:shoppingList){
+                for(toBuyProduct p:shoppingList){
                     if(p.isChecked())
                         count++;
 
@@ -66,12 +64,9 @@ public class ShoppingList extends AppCompatActivity {
             }
         });
 
-
         Intent intent = getIntent();
-        Bundle args = intent.getBundleExtra("BUNDLE");
-        shoppingList = (ArrayList<Product>) args.getSerializable("ARRAYLIST");
 
-
+        shoppingList =  intent.getParcelableArrayListExtra("BUNDLE");
 
         recyclerview = findViewById(R.id.recyclerView2);
         recyclerview.setHasFixedSize(true);
@@ -84,10 +79,11 @@ public class ShoppingList extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data) {
-        shoppingList.add(shoppingList.size(), (Product) data.getSerializableExtra("ProductAdded"));
-        adapter.notifyItemInserted(shoppingList.size());
-        super.onActivityResult(requestCode, resultCode, data);
-
+        if(requestCode==45) {
+            shoppingList.add(shoppingList.size(), (toBuyProduct) data.getParcelableExtra("ProductAdded"));
+            adapter.notifyItemInserted(shoppingList.size());
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -102,12 +98,10 @@ public class ShoppingList extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.Save:
                 Intent resultIntent = new Intent();
-                Bundle args = new Bundle();
-                args.putSerializable("ARRAYLIST",shoppingList);
-                resultIntent.putExtra("BUNDLE",args);
+                resultIntent.putParcelableArrayListExtra("RESULTS", shoppingList);
+                setResult(Activity.RESULT_OK, resultIntent);
                 finish();
                 return true;
-
 
             default:
                 return super.onOptionsItemSelected(item);

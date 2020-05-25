@@ -1,30 +1,50 @@
 package com.example.apps.items;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.ArrayList;
 
-public class item {
+public class item implements Parcelable {
     private int mImageResource;
     private String mText1;
     private String mText2;
-    private ArrayList<Product> array1;
-    private ArrayList<Product> array2;
+    private ArrayList<alreadyBoughtProduct> arrayComprados;
+    private ArrayList<toBuyProduct> arrayComprar;
 
 
-    public item(int imagem, String texto1, ArrayList<Product> arrayComprados, ArrayList<Product> arrayComprar) {
+    public item(int imagem, String texto1, ArrayList<alreadyBoughtProduct> arrayComprados, ArrayList<toBuyProduct> arrayComprar) {
         mImageResource = imagem;
         mText1 = texto1;
 
         if(arrayComprar != null){
-            array1= arrayComprar;
+            this.arrayComprar= arrayComprar;
             mText2=  String.valueOf(arrayComprar.size());
         }
         if(arrayComprados != null){
-            array2= arrayComprados;
+            this.arrayComprados= arrayComprados;
             mText2=  String.valueOf(arrayComprados.size());
         }
     }
+
+    protected item(Parcel in) {
+        mImageResource = in.readInt();
+        mText1 = in.readString();
+        mText2 = in.readString();
+    }
+
+    public static final Creator<item> CREATOR = new Creator<item>() {
+        @Override
+        public item createFromParcel(Parcel in) {
+            return new item(in);
+        }
+
+        @Override
+        public item[] newArray(int size) {
+            return new item[size];
+        }
+    };
 
     public int getmImageResource(){
         return mImageResource;
@@ -38,20 +58,32 @@ public class item {
         return mText2;
     }
 
-    public ArrayList<Product> getArray2() {
-        return array2;
+    public ArrayList<toBuyProduct> getArrayComprar() {
+        return arrayComprar;
     }
 
-    public ArrayList<Product> getArray1() {
-        return array1;
+    public ArrayList<alreadyBoughtProduct> getArrayComprados() {
+        return arrayComprados;
     }
 
-    public void setArray1(ArrayList<Product> array1) {
-        this.array1 = array1;
+    public void setArray1(ArrayList<alreadyBoughtProduct> array1) {
+        this.arrayComprados = array1;
     }
 
-    public void setArray2(ArrayList<Product> array2) {
-        this.array2 = array2;
+    public void setArray2(ArrayList<toBuyProduct> array2) {
+        this.arrayComprar = array2;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mImageResource);
+        dest.writeString(mText1);
+        dest.writeString(mText2);
     }
 }
 

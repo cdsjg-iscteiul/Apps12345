@@ -1,6 +1,5 @@
 package com.example.apps.utility;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apps.R;
-import com.example.apps.items.Product;
+import com.example.apps.items.toBuyProduct;
+
 import java.util.ArrayList;
 
 public class CardConstructer extends RecyclerView.Adapter<CardConstructer.cardView> {
 
-    private ArrayList<Product> list;
+    private ArrayList<toBuyProduct> list;
 
     public static class cardView extends RecyclerView.ViewHolder {
 
@@ -34,7 +34,7 @@ public class CardConstructer extends RecyclerView.Adapter<CardConstructer.cardVi
             checkBox = itemView.findViewById(R.id.shoplist_checkbox);
         }
     }
-    public CardConstructer(ArrayList<Product> list) {
+    public CardConstructer(ArrayList<toBuyProduct> list) {
         this.list = list;
     }
 
@@ -49,10 +49,10 @@ public class CardConstructer extends RecyclerView.Adapter<CardConstructer.cardVi
 
     @Override
     public void onBindViewHolder(@NonNull cardView card, int position) {
-        Product p = list.get(position);
+        toBuyProduct p = list.get(position);
         p.setCheckBox(card.checkBox);
         card.name.setText(p.getName());
-        card.amount.setText(""+p.getAmount());
+        card.amount.setText(""+p.getAmout());
         card.type.setText(TypeOfProduct.toString(p.getType()));
     }
 

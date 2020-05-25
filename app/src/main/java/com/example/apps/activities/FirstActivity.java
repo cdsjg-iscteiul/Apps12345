@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,8 +18,11 @@ import com.example.apps.utility.Adapter;
 import com.example.apps.R;
 import com.example.apps.items.item;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class FirstActivity extends AppCompatActivity {
@@ -27,6 +31,7 @@ public class FirstActivity extends AppCompatActivity {
     private Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     private ArrayList<item> items;
+    private ArrayList<Product> lista;
     FirebaseAuth fAuth;
 
     @Override
@@ -34,14 +39,10 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        createList();
+        loadData();
         buildRecyclerView();
 
-    }
 
-    public void createList(){
-        items = new ArrayList<>();
     }
 
     public void buildRecyclerView(){
@@ -57,16 +58,19 @@ public class FirstActivity extends AppCompatActivity {
             public void onItemClick(int position) {
 
                 if(items.get(position).getArray1()!= null) {
-                    ArrayList<Object> object = new ArrayList<Object>();
                     Intent intent = new Intent(FirstActivity.this, ShoppingList.class);
                     Bundle args = new Bundle();
-                    args.putSerializable("ARRAYLIST",(Serializable)object);
+                    args.putSerializable("ARRAYLIST",(Serializable)items.get(position).getArray1());
                     intent.putExtra("BUNDLE",args);
-                    startActivity(intent);
+                    startActivityForResult(intent,3);
                 }
 
                 if(items.get(position).getArray2()!= null) {
-                    startActivity(new Intent(getApplicationContext(), Storage.class));
+                    Intent intent = new Intent(FirstActivity.this, Storage.class);
+                    Bundle args = new Bundle();
+                    args.putSerializable("ARRAYLIST",(Serializable)items.get(position).getArray2());
+                    intent.putExtra("BUNDLE",args);
+                    startActivityForResult(intent,4);
                 }
 
 
@@ -81,27 +85,64 @@ public class FirstActivity extends AppCompatActivity {
         return true;
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data, int position) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
                 String text = data.getStringExtra("ListName");
-                Toast.makeText(FirstActivity.this, text, Toast.LENGTH_SHORT).show();
                 items.add(items.size(), new item(R.drawable.ic_shopping,text,null ,new ArrayList<Product>()));
                 mAdapter.notifyItemInserted(items.size());
+                saveData();
             }
         }
 
         if(requestCode == 2){
             if (resultCode == RESULT_OK) {
                 String text = data.getStringExtra("ListName");
-                Toast.makeText(FirstActivity.this, text, Toast.LENGTH_SHORT).show();
                 items.add(items.size(), new item(R.drawable.ic_office_material,text,new ArrayList<Product>() ,null));
                 mAdapter.notifyItemInserted(items.size());
+                saveData();
             }
         }
+
+        if(requestCode == 3){
+            Intent intent = getIntent();
+            Bundle args = intent.getBundleExtra("BUNDLE");
+            lista = (ArrayList<Product>) args.getSerializable("ARRAYLIST");
+            items.get(position).setArray1(lista);
+            saveData();
+        }
+
+        if(requestCode ==4){
+            Intent intent = getIntent();
+            Bundle args = intent.getBundleExtra("BUNDLE");
+            lista = (ArrayList<Product>) args.getSerializable("ARRAYLIST");
+            items.get(position).setArray2(lista);
+            saveData();
+        }
+
     }
 
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(items);
+        editor.putString("task list", json);
+        editor.apply();
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task list", null);
+        Type type = new TypeToken<ArrayList<item>>() {}.getType();
+        items = gson.fromJson(json, type);
+        if (items == null) {
+            items = new ArrayList<>();
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

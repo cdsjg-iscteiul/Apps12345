@@ -1,6 +1,7 @@
 package com.example.apps.activities;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,13 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.apps.R;
 import com.example.apps.items.Product;
+import com.example.apps.items.item;
 import com.example.apps.utility.CardConstructer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ShoppingList extends AppCompatActivity {
@@ -32,6 +39,9 @@ public class ShoppingList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_list);
+
+        getSupportActionBar().setTitle("Check Shopping List");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         floatingActionButton = findViewById(R.id.floatingActionButton);
 
@@ -62,6 +72,7 @@ public class ShoppingList extends AppCompatActivity {
         shoppingList = (ArrayList<Product>) args.getSerializable("ARRAYLIST");
 
 
+
         recyclerview = findViewById(R.id.recyclerView2);
         recyclerview.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -79,6 +90,29 @@ public class ShoppingList extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.teste, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.Save:
+                Intent resultIntent = new Intent();
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST",shoppingList);
+                resultIntent.putExtra("BUNDLE",args);
+                finish();
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
 
 

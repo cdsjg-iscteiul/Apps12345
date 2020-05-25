@@ -70,7 +70,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ExampleViewHolder> {
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
         item current = mLista.get(position);
 
-        holder.mImageView.setImageResource(current.getmImageResource());
+//        holder.mImageView.setImageResource(current.getmImageResource());
         holder.mText1.setText(current.getmText1());
         holder.mtext2.setText("Número de produtos na lista: " + current.getmText2());
     }

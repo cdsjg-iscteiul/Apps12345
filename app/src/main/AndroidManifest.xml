@@ -8,8 +8,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.Storage"></activity>
-        <activity android:name=".activities.ShoppingList" />
+        <activity android:name=".activities.Storage"
+            android:parentActivityName=".activities.FirstActivity"></activity>
+        <activity android:name=".activities.ShoppingList"
+            android:parentActivityName=".activities.FirstActivity"/>
         <activity android:name=".activities.AddProductMaria" />
         <activity android:name=".activities.AddProduct" />
         <activity android:name=".activities.AddList"

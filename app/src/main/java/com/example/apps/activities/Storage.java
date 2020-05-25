@@ -1,5 +1,6 @@
 package com.example.apps.activities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,10 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.apps.R;
 import com.example.apps.items.Product;
+import com.example.apps.items.item;
 import com.example.apps.utility.Adap;
 import com.example.apps.utility.CardConstructer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,6 +38,9 @@ public class Storage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_storage);
 
+        getSupportActionBar().setTitle("Check Product List");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         floatingActionButton = findViewById(R.id.floatingActionButtonM);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +50,10 @@ public class Storage extends AppCompatActivity {
             }
         });
 
-        storageList = new ArrayList<>();
+        Intent intent = getIntent();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        storageList = (ArrayList<Product>) args.getSerializable("ARRAYLIST");
+
         recyclerview = findViewById(R.id.recyclerViewM);
         recyclerview.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -58,5 +69,29 @@ public class Storage extends AppCompatActivity {
         adapter.notifyItemInserted(storageList.size());
         super.onActivityResult(requestCode, resultCode, data);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.teste, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.Save:
+                Intent resultIntent = new Intent();
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST",storageList);
+                resultIntent.putExtra("BUNDLE",args);
+                finish();
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

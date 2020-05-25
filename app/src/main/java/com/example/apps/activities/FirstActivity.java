@@ -55,6 +55,12 @@ public class FirstActivity extends AppCompatActivity {
 
         mAdapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
             @Override
+            public void onDeleteClick(int position) {
+                items.remove(position);
+                mAdapter.notifyItemRemoved(position);
+            }
+
+            @Override
             public void onItemClick(int position) {
 
                 if(items.get(position).getArray1()!= null) {
@@ -72,6 +78,7 @@ public class FirstActivity extends AppCompatActivity {
                     intent.putExtra("BUNDLE",args);
                     startActivityForResult(intent,4);
                 }
+
 
 
             }

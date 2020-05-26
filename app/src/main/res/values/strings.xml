@@ -4,4 +4,5 @@
     <string name="add">ADD</string>
     <string name="new_list_name">New List name</string>
     <string name="amount">Amount</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

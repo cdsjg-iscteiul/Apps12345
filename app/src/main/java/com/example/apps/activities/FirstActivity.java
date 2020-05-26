@@ -7,11 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.apps.api.JsonToObject;
+import com.example.apps.api.Recipe;
 import com.example.apps.utility.Adapter;
 import com.example.apps.items.BoughtProduct;
 import com.example.apps.items.ProductsToBuy;
@@ -20,6 +23,13 @@ import com.example.apps.items.item;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FirstActivity extends AppCompatActivity {
 
@@ -63,7 +73,14 @@ public class FirstActivity extends AppCompatActivity {
             public void onItemClick(int position) {
 
                 if(items.get(position).getArray1()!= null) {
-                    startActivity(new Intent(getApplicationContext(), ShoppingList.class));
+                    Intent intent = new Intent(getApplicationContext(), ShoppingList.class);
+                    ArrayList<String> listaux = new ArrayList<>();
+                    for(item i:items) {
+                        if(i.getmImageResource()==R.drawable.ic_office_material)
+                        listaux.add(i.getmText1());
+                    }
+                    intent.putStringArrayListExtra("sendlist",listaux);
+                    startActivityForResult(intent,20);
                 }
 
                 if(items.get(position).getArray2()!= null) {
@@ -123,12 +140,16 @@ public class FirstActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
                 break;
-
+            case R.id.item3:
+                startActivity(new Intent(getApplicationContext(), RecipeSearch.class));
 
             default:
                 return super.onOptionsItemSelected(item);
         }
         return  true;
     }
+
+
+
 }
 

@@ -43,6 +43,10 @@ public class Product implements Serializable {
         return checkBox.isChecked();
     }
 
+    public void setCheck(boolean b){
+        checkBox.setChecked(b);
+    }
+
     public TypeOfProduct getType() {
         return type;
     }

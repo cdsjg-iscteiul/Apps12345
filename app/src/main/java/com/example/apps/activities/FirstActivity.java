@@ -77,11 +77,11 @@ public class FirstActivity extends AppCompatActivity {
 
                 if(items.get(position).getArrayComprados()!= null) {
                     Log.e("TOU ONDE?","-----------> TOU NO ON CLICK DA PASTA" );
-                    /*Intent intent = new Intent(FirstActivity.this, Storage.class);
-                    intent.putParcelableArrayListExtra("BUNDLE",items.get(position).getArray2());
+                    Intent intent = new Intent(FirstActivity.this, Storage.class);
+                    intent.putParcelableArrayListExtra("ARRAYCOMPRADOS",items.get(position).getArrayComprados());
                     positionTest = position;
-                    startActivityForResult(intent,4);
-                     */
+                    startActivityForResult(intent,3);
+
                 }
 
 
@@ -131,7 +131,7 @@ public class FirstActivity extends AppCompatActivity {
 
         if(requestCode ==4){
             if (resultCode == RESULT_OK) {
-                ArrayList<alreadyBoughtProduct> lista = data.getParcelableArrayListExtra("RESULTS");
+                ArrayList<alreadyBoughtProduct> lista = data.getParcelableArrayListExtra("RESULTSstorage");
                 Log.e("RECEBI ESTA MERDA", lista.toString());
                 items.get(positionTest).setArray1(lista);
                 saveData();

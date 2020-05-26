@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -48,8 +49,7 @@ public class Storage extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        Bundle args = intent.getBundleExtra("BUNDLE");
-        //storageList = (ArrayList<alreadyBoughtProduct>) args.getSerializable("ARRAYLIST");
+        storageList =  intent.getParcelableArrayListExtra("ARRAYCOMPRADOS");
 
         recyclerview = findViewById(R.id.recyclerViewM);
         recyclerview.setHasFixedSize(true);
@@ -80,9 +80,8 @@ public class Storage extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.Save:
                 Intent resultIntent = new Intent();
-                Bundle args = new Bundle();
-                args.putSerializable("ARRAYLIST",storageList);
-                resultIntent.putExtra("BUNDLE",args);
+                resultIntent.putParcelableArrayListExtra("RESULTSstorage", storageList);
+                setResult(Activity.RESULT_OK, resultIntent);
                 finish();
                 return true;
 

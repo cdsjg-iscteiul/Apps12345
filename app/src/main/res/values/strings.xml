@@ -4,5 +4,10 @@
     <string name="add">ADD</string>
     <string name="new_list_name">New List name</string>
     <string name="amount">Amount</string>
+    <string name="remove_product_form_list">Remove product form list</string>
+    <string name="recipe_search">Recipe Search</string>
+    <string name="search_recipe">Search Recipe</string>
+    <string name="ex_20">Ex: 20</string>
+    <string name="ex_apple_sugar">Ex: Apple, Sugar</string>
     <string name="title_activity_maps">Map</string>
 </resources>

@@ -74,6 +74,10 @@ public class toBuyProduct implements  Parcelable{
         return checkBox.isChecked();
     }
 
+    public void setCheck(boolean b){
+        checkBox.setChecked(b);
+    }
+
     @Override
     public String toString() {
         return "Product{" +

@@ -1,7 +1,6 @@
 package com.example.apps.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,9 +9,7 @@ import android.util.Log;
 
 import com.example.apps.R;
 import com.example.apps.api.RecipeAfterSearch;
-import com.example.apps.items.Product;
 import com.example.apps.utility.AdapterRecipes;
-import com.example.apps.utility.CardConstructer;
 
 import java.util.ArrayList;
 

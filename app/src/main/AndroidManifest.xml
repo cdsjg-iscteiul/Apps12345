@@ -35,6 +35,8 @@
         <activity android:name=".activities.ShoppingList" />
         <activity android:name=".activities.AddProductMaria" />
         <activity android:name=".activities.AddProduct" />
+        <activity android:name=".activities.SearchResult"></activity>
+        <activity android:name=".activities.RecipeSearch" />
         <activity
             android:name=".activities.AddList"
             android:parentActivityName=".activities.FirstActivity" />

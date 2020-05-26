@@ -16,11 +16,11 @@
         android:title="Supermarkets"
         app:showAsAction="never"/>
 
-    <item android:id="@+id/item2"
-        android:title="Logout"
-        app:showAsAction="never"/>
-
     <item android:id="@+id/item3"
         android:title="Recipe"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/item2"
+        android:title="Logout"
         app:showAsAction="never"/>
 </menu>

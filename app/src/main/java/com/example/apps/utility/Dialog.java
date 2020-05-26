@@ -3,21 +3,12 @@ package com.example.apps.utility;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.apps.R;
-import com.example.apps.activities.MainActivity;
-import com.example.apps.items.Product;
 
 import java.util.ArrayList;
 
@@ -34,7 +25,7 @@ public class Dialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         Bundle b = getArguments();
-        listsNames = b.getStringArrayList("list");
+        listsNames = b.getStringArrayList("sendlist");
         final CharSequence[] s =  listsNames.toArray(new CharSequence[listsNames.size()+1]);
         s[listsNames.size()]="Remove From Shopping List";
         builder.setTitle("Send To List").setItems(s, new DialogInterface.OnClickListener() {

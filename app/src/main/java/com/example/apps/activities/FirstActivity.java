@@ -69,8 +69,19 @@ public class FirstActivity extends AppCompatActivity {
                 Log.e("QUE TEM A LISTA?","-----------------------> " + items.get(position).getArrayComprar()  );
                 if(items.get(position).getArrayComprar()!= null) {
                     Log.e("TOU ONDE?","-----------> TOU NO ON CLICK DO CARRINHO" );
+
+
+                    ArrayList<String> listaux = new ArrayList<>();
+                    for(item i:items) {
+                        if(i.getmImageResource()==R.drawable.ic_office_material)
+                            listaux.add(i.getmText1());
+                    }
+
+
+
                     Intent intent = new Intent(FirstActivity.this, ShoppingList.class);
                     intent.putParcelableArrayListExtra("BUNDLE",items.get(position).getArrayComprar());
+                    intent.putStringArrayListExtra("sendlist",listaux);
                     positionTest = position;
                     startActivityForResult(intent,3);
 
@@ -84,6 +95,8 @@ public class FirstActivity extends AppCompatActivity {
                     startActivityForResult(intent,3);
 
                 }
+
+
 
 
 
@@ -185,7 +198,8 @@ public class FirstActivity extends AppCompatActivity {
                 break;
             case R.id.find_supermarkets:
                 startActivity(new Intent(getApplicationContext(), MapsActivity.class));
-
+            case R.id.item3:
+                startActivity(new Intent(getApplicationContext(), RecipeSearch.class));
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -28,7 +28,6 @@ import java.util.Iterator;
 public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceListener {
 
     private ArrayList<toBuyProduct> shoppingList;
-    private ArrayList<Product> shoppingList;
     private ArrayList<String> listsNames;
     private RecyclerView recyclerview;
     private CardConstructer adapter;
@@ -69,7 +68,7 @@ public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceL
                 Dialog d = new Dialog();
                 Bundle b = new Bundle();
 
-                b.putStringArrayList("list",listsNames);
+                b.putStringArrayList("sendlist",listsNames);
                 d.setArguments(b);
                 d.show(getSupportFragmentManager(),"ola");
             }
@@ -125,9 +124,9 @@ public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceL
     @Override
     public void removeAndUpdate() {
         int counter = 0;
-        Iterator<Product> i = shoppingList.iterator();
+        Iterator<toBuyProduct> i = shoppingList.iterator();
         while (i.hasNext()) {
-            Product s = i.next(); // must be called before you can call i.remove()
+            toBuyProduct s = i.next(); // must be called before you can call i.remove()
             if(s.isChecked()) {
                 s.setCheck(false);
                 i.remove();

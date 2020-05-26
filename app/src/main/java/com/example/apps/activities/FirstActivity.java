@@ -18,6 +18,7 @@ import com.example.apps.items.toBuyProduct;
 import com.example.apps.utility.Adapter;
 import com.example.apps.R;
 import com.example.apps.items.item;
+import com.example.apps.utility.MapsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -182,6 +183,8 @@ public class FirstActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
                 break;
+            case R.id.find_supermarkets:
+                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
 
             default:
                 return super.onOptionsItemSelected(item);

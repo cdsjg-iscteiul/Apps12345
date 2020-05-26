@@ -11,7 +11,7 @@ public class toBuyProduct implements  Parcelable{
     private String name;
     private int amout;
     private TypeOfProduct type;
-    private CheckBox checkBox;
+    private transient CheckBox checkBox;
 
     public toBuyProduct(String name, int amount, TypeOfProduct type) {
         this.name = name;

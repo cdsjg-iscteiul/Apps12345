@@ -32,15 +32,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ExampleViewHolder> {
 
         public ImageView mImageView;
         public TextView mText1;
-        public TextView mtext2;
+        public TextView mText2;
         public  ImageView mDelete;
 
         public ExampleViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
-            mImageView = itemView.findViewById(R.id.imageView);
-            mText1 = itemView.findViewById(R.id.text1);
-            mtext2 = itemView.findViewById(R.id.text2);
-            mDelete = itemView.findViewById(R.id.delete);
+            this.mImageView = itemView.findViewById(R.id.imageView);
+            this.mText1 = itemView.findViewById(R.id.text1);
+            this.mText2 = itemView.findViewById(R.id.text2);
+            this.mDelete = itemView.findViewById(R.id.delete);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,7 +87,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ExampleViewHolder> {
 
         holder.mImageView.setImageResource(current.getmImageResource());
         holder.mText1.setText(current.getmText1());
-        holder.mtext2.setText("Número de produtos na lista: " + current.getmText2());
+        holder.mText2.setText("Número de produtos na lista: " + current.getmText2());
     }
 
     @Override

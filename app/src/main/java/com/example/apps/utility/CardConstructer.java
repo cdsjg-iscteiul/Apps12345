@@ -23,7 +23,7 @@ public class CardConstructer extends RecyclerView.Adapter<CardConstructer.cardVi
         public TextView name;
         public TextView amount;
         public TextView type;
-        public CheckBox checkBox;
+        public transient CheckBox checkBox;
 
 
         public cardView(@NonNull View itemView) {

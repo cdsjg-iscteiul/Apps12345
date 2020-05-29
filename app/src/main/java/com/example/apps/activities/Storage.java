@@ -47,7 +47,7 @@ public class Storage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivityForResult(new Intent(getApplicationContext(), AddProductToTheList.class).putExtra("NotificationNumber",storageList.size()),1);
+                startActivityForResult(new Intent(getApplicationContext(), AddProductToTheList.class).putExtra("NotificationNumber",storageList.size()),50);
             }
         });
 
@@ -74,7 +74,7 @@ public class Storage extends AppCompatActivity {
     @Override
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data) {
         Log.e("asd","ESTOU AQUI XD "+requestCode);
-        if(requestCode==1 && resultCode==RESULT_OK) {
+        if(requestCode==50 && resultCode==RESULT_OK) {
             storageList.add(storageList.size(), (alreadyBoughtProduct) data.getParcelableExtra("ProductAdded"));
             adapter.notifyItemInserted(storageList.size());
             super.onActivityResult(requestCode, resultCode, data);
@@ -97,6 +97,7 @@ public class Storage extends AppCompatActivity {
                 Intent resultIntent = new Intent();
                 resultIntent.putParcelableArrayListExtra("RESULTSstorage", storageList);
                 setResult(Activity.RESULT_OK, resultIntent);
+                Log.e("O QUE TYOU A MANDAR ------------>      ", storageList.toString());
                 finish();
                 return true;
 

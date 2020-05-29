@@ -75,7 +75,7 @@ public class FirstActivity extends AppCompatActivity {
                 intent.putParcelableArrayListExtra("ARRAYCOMPRADOS",items.get(position).getArrayComprados());
                 positionTest = position;
                 if(listTosend==null) {
-                    startActivityForResult(intent, 3);
+                    startActivityForResult(intent, 4);
                 }else{
 
                     intent.putParcelableArrayListExtra("listaTransferida",listTosend);
@@ -150,7 +150,6 @@ public class FirstActivity extends AppCompatActivity {
         if(requestCode == 3){
             if (resultCode == RESULT_OK && data.getIntExtra("listToFill",-1)==-1) {
                 ArrayList<toBuyProduct> lista = data.getParcelableArrayListExtra("RESULTS");
-                Log.e("RECEBI ESTA MERDA", lista.toString());
                 items.get(positionTest).setArray2(lista);
                 saveData();
                 mAdapter.notifyDataSetChanged();
@@ -169,7 +168,7 @@ public class FirstActivity extends AppCompatActivity {
         if(requestCode ==4){
             if (resultCode == RESULT_OK) {
                 ArrayList<alreadyBoughtProduct> lista = data.getParcelableArrayListExtra("RESULTSstorage");
-                Log.e("RECEBI ESTA MERDA", lista.toString());
+                Log.e("RECEBI ESTA MERDA nos produtso --------->  ", lista.toString());
                 items.get(positionTest).setArray1(lista);
                 saveData();
                 mAdapter.notifyDataSetChanged();

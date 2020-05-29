@@ -63,9 +63,11 @@ public class Storage extends AppCompatActivity {
     @Override
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data) {
 
-        storageList.add(storageList.size(), (alreadyBoughtProduct) data.getSerializableExtra("ProductAdded"));
-        adapter.notifyItemInserted(storageList.size());
-        super.onActivityResult(requestCode, resultCode, data);
+        if(true) {
+            storageList.add(storageList.size(), (alreadyBoughtProduct) data.getParcelableExtra("ProductAdded"));
+            adapter.notifyItemInserted(storageList.size());
+            super.onActivityResult(requestCode, resultCode, data);
+        }
 
     }
 

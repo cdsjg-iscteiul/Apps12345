@@ -77,11 +77,11 @@ public class FirstActivity extends AppCompatActivity {
                 if(listTosend==null) {
                     startActivityForResult(intent, 3);
                 }else{
-                    /*
+
                     intent.putParcelableArrayListExtra("listaTransferida",listTosend);
                     startActivityForResult(intent,10);
 
-                     */
+
                 }
 
             }

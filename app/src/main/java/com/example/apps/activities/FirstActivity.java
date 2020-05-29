@@ -222,8 +222,11 @@ public class FirstActivity extends AppCompatActivity {
                 break;
             case R.id.find_supermarkets:
                 startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                return  true;
+
             case R.id.item3:
                 startActivity(new Intent(getApplicationContext(), RecipeSearch.class));
+                return  true;
             default:
                 return super.onOptionsItemSelected(item);
         }

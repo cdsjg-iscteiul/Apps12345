@@ -40,6 +40,8 @@ public class RecipeSearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_search);
 
+        Log.e("ADSD","ASHDASDAA XD");
+
         editText = findViewById(R.id.ListOfProducts);
         editText2 = findViewById(R.id.numberOfSearch);
         button = findViewById(R.id.StartSearch);
@@ -61,10 +63,7 @@ public class RecipeSearch extends AppCompatActivity {
                 .build();
 
         JsonToObject jsonPostApi = retrofit.create(JsonToObject.class);
-
-
-        Call<List<Recipe>> call = jsonPostApi.getRecipes("b5a9c3d3771345ac8e3f0e24e1a5fa90", ingredient,numberOfsearches,false,null,true);
-
+        Call<List<Recipe>> call = jsonPostApi.getRecipes("e49b2232910c4c9087f7e59c8caea66b", ingredient,numberOfsearches,false,null,true);
         try {
             List<Recipe> receitas = call.execute().body();
             for (Recipe r : receitas) {

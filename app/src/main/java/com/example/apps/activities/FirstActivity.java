@@ -158,10 +158,11 @@ public class FirstActivity extends AppCompatActivity {
                 ArrayList<alreadyBoughtProduct> ab = data.getParcelableArrayListExtra("listofp");
                 listTosend=ab;
                 int count=0;
-                for(int i=0;i!=mAdapter.getItemCount();i++){
-
+                for(int i=0;i!=items.size();i++){
+                    if(items.get(i).getmImageResource()==R.drawable.ic_office_material)
+                        count++;
                 }
-                adaperClick.onItemClick(1);
+                adaperClick.onItemClick(count);
             }
         }
 

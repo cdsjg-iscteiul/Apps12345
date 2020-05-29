@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -59,15 +60,25 @@ public class Storage extends AppCompatActivity {
 
         recyclerview.setLayoutManager(layoutManager);
         recyclerview.setAdapter(adapter);
+
+        if(getIntent().getParcelableArrayListExtra("listaTransferida")!=null){
+            ArrayList<alreadyBoughtProduct> aux = getIntent().getParcelableArrayListExtra("listaTransferida");
+            for(alreadyBoughtProduct p:aux){
+                storageList.add(p);
+                adapter.notifyItemInserted(storageList.size());
+            }
+        }
     }
     @Override
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data) {
-
-        if(true) {
+        Log.e("asd","ESTOU AQUI XD "+requestCode);
+        if(requestCode==1 && resultCode==RESULT_OK) {
             storageList.add(storageList.size(), (alreadyBoughtProduct) data.getParcelableExtra("ProductAdded"));
             adapter.notifyItemInserted(storageList.size());
             super.onActivityResult(requestCode, resultCode, data);
         }
+
+
 
     }
 

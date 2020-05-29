@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -45,7 +46,8 @@ public class Storage extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getApplicationContext(), AddProductMaria.class),1);
+
+                startActivityForResult(new Intent(getApplicationContext(), AddProductToTheList.class).putExtra("NotificationNumber",storageList.size()),1);
             }
         });
 
@@ -77,7 +79,6 @@ public class Storage extends AppCompatActivity {
             adapter.notifyItemInserted(storageList.size());
             super.onActivityResult(requestCode, resultCode, data);
         }
-
 
 
     }

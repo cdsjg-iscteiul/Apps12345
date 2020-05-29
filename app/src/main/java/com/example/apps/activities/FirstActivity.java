@@ -34,6 +34,64 @@ public class FirstActivity extends AppCompatActivity {
     private ArrayList<item> items;
     private int positionTest;
     FirebaseAuth fAuth;
+    AdaperClick adaperClick;
+    ArrayList<alreadyBoughtProduct> listTosend;
+
+    private class AdaperClick implements Adapter.OnItemClickListener {
+        @Override
+        public void onDeleteClick(int position) {
+            items.remove(position);
+            mAdapter.notifyItemRemoved(position);
+            saveData();
+        }
+
+        @Override
+        public void onItemClick(int position) {
+            Log.e("TOU ONDE?","-----------> TOU NO ON CLICK" );
+            Log.e("QUE TEM A LISTA?","-----------------------> " + items.get(position).getArrayComprar()  );
+            if(items.get(position).getArrayComprar()!= null) {
+                Log.e("TOU ONDE?","-----------> TOU NO ON CLICK DO CARRINHO" );
+
+
+                ArrayList<String> listaux = new ArrayList<>();
+                for(item i:items) {
+                    if(i.getmImageResource()==R.drawable.ic_office_material)
+                        listaux.add(i.getmText1());
+                }
+
+
+
+                Intent intent = new Intent(FirstActivity.this, ShoppingList.class);
+                intent.putParcelableArrayListExtra("BUNDLE",items.get(position).getArrayComprar());
+                intent.putStringArrayListExtra("sendlist",listaux);
+                positionTest = position;
+                startActivityForResult(intent,3);
+
+            }
+
+            if(items.get(position).getArrayComprados()!= null) {
+                Log.e("TOU ONDE?","-----------> TOU NO ON CLICK DA PASTA" );
+                Intent intent = new Intent(FirstActivity.this, Storage.class);
+                intent.putParcelableArrayListExtra("ARRAYCOMPRADOS",items.get(position).getArrayComprados());
+                positionTest = position;
+                if(listTosend==null) {
+                    startActivityForResult(intent, 3);
+                }else{
+                    /*
+                    intent.putParcelableArrayListExtra("listaTransferida",listTosend);
+                    startActivityForResult(intent,10);
+
+                     */
+                }
+
+            }
+
+
+
+
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,53 +113,8 @@ public class FirstActivity extends AppCompatActivity {
         mRecycler.setLayoutManager(mManager);
         mRecycler.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
-            @Override
-            public void onDeleteClick(int position) {
-                items.remove(position);
-                mAdapter.notifyItemRemoved(position);
-                saveData();
-            }
-
-            @Override
-            public void onItemClick(int position) {
-                Log.e("TOU ONDE?","-----------> TOU NO ON CLICK" );
-                Log.e("QUE TEM A LISTA?","-----------------------> " + items.get(position).getArrayComprar()  );
-                if(items.get(position).getArrayComprar()!= null) {
-                    Log.e("TOU ONDE?","-----------> TOU NO ON CLICK DO CARRINHO" );
-
-
-                    ArrayList<String> listaux = new ArrayList<>();
-                    for(item i:items) {
-                        if(i.getmImageResource()==R.drawable.ic_office_material)
-                            listaux.add(i.getmText1());
-                    }
-
-
-
-                    Intent intent = new Intent(FirstActivity.this, ShoppingList.class);
-                    intent.putParcelableArrayListExtra("BUNDLE",items.get(position).getArrayComprar());
-                    intent.putStringArrayListExtra("sendlist",listaux);
-                    positionTest = position;
-                    startActivityForResult(intent,3);
-
-                }
-
-                if(items.get(position).getArrayComprados()!= null) {
-                    Log.e("TOU ONDE?","-----------> TOU NO ON CLICK DA PASTA" );
-                    Intent intent = new Intent(FirstActivity.this, Storage.class);
-                    intent.putParcelableArrayListExtra("ARRAYCOMPRADOS",items.get(position).getArrayComprados());
-                    positionTest = position;
-                    startActivityForResult(intent,3);
-
-                }
-
-
-
-
-
-            }
-        });
+        adaperClick = new AdaperClick();
+        mAdapter.setOnItemClickListener(adaperClick);
     }
 
     @Override
@@ -114,6 +127,7 @@ public class FirstActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        listTosend=null;
         if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
                 String text = data.getStringExtra("ListName");
@@ -134,12 +148,20 @@ public class FirstActivity extends AppCompatActivity {
 
 
         if(requestCode == 3){
-            if (resultCode == RESULT_OK) {
+            if (resultCode == RESULT_OK && data.getIntExtra("listToFill",-1)==-1) {
                 ArrayList<toBuyProduct> lista = data.getParcelableArrayListExtra("RESULTS");
                 Log.e("RECEBI ESTA MERDA", lista.toString());
                 items.get(positionTest).setArray2(lista);
                 saveData();
                 mAdapter.notifyDataSetChanged();
+            }else if(resultCode == RESULT_OK){
+                ArrayList<alreadyBoughtProduct> ab = data.getParcelableArrayListExtra("listofp");
+                listTosend=ab;
+                int count=0;
+                for(int i=0;i!=mAdapter.getItemCount();i++){
+
+                }
+                adaperClick.onItemClick(1);
             }
         }
 
@@ -152,6 +174,7 @@ public class FirstActivity extends AppCompatActivity {
                 mAdapter.notifyDataSetChanged();
             }
         }
+
 
 
 

@@ -3,6 +3,7 @@ package com.example.apps.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.apps.api.JsonToObject;
 import com.example.apps.api.Recipe;
 import com.example.apps.api.RecipeAfterSearch;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,8 @@ public class RecipeSearch extends AppCompatActivity {
     EditText editText2;
     Button button;
     TextView t;
-    ArrayList<RecipeAfterSearch> result;
+    ArrayList<RecipeAfterSearch> result = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +48,7 @@ public class RecipeSearch extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callApi(Integer.parseInt(editText2.getText().toString()),editText.getText().toString());
-
-
+                new WaitForRetrofit().execute();
             }
         });
 
@@ -61,59 +62,38 @@ public class RecipeSearch extends AppCompatActivity {
 
         JsonToObject jsonPostApi = retrofit.create(JsonToObject.class);
 
-        result = new ArrayList<>();
 
         Call<List<Recipe>> call = jsonPostApi.getRecipes("b5a9c3d3771345ac8e3f0e24e1a5fa90", ingredient,numberOfsearches,false,null,true);
-        call.enqueue(new Callback<List<Recipe>>() {
-            @Override
-            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                if (!response.isSuccessful()) {
-                    //textView.setText("Code: " + response.code());
-                    return;
-                }
 
-                List<Recipe> receitas = response.body();
-                int count=0;
-                for (Recipe r : receitas) {
-                    count++;
-                    String rp = "Receita - "+count+"\n";
-                    rp += "ID: " + r.getId() +"\n";
-                    rp += "Image: " + r.getImage() + "\n";
-                    rp += "tipo: " + r.getImageType() +"\n";
-                    rp += "Likes: " + r.getLikes() + "\n";
-                    rp += "mari: " + r.getMissedIngredientCount() +"\n";
-                    rp += "\n";
-
-                    for(int i = 0;i!=r.getMissedIngredientCount();i++) {
-                        int j = i+1;
-                        rp += "INGREDIENTE - " + j + "                     \n";
-                        rp += "ID - " + r.getMissedIngredients()[i].getId() + "\n";
-                        rp += "Amount - " + r.getMissedIngredients()[i].getAmount()+ "\n";
-                        rp += "Unit - " + r.getMissedIngredients()[i].getUnit()+ "\n";
-                        rp += "UnitLong - " + r.getMissedIngredients()[i].getUnitLong()+ "\n";
-                        rp += "UnitShort - " + r.getMissedIngredients()[i].getUnitShort()+ "\n";
-                        rp += "Aisle - " + r.getMissedIngredients()[i].getAisle()+ "\n";
-                        rp += "Name - " + r.getMissedIngredients()[i].getName()+ "\n";
-                        rp += "original - " + r.getMissedIngredients()[i].getOriginal()+ "\n";
-                        rp += "originalString - " + r.getMissedIngredients()[i].getOriginal()+ "\n";
-                        rp += "Imagem - " + r.getMissedIngredients()[i].getImage()+ "\n";
-                        rp += "Meta - " + r.getMissedIngredients()[i].getMeta().length+ "\n";
-                        rp += "Meta Information - " + r.getMissedIngredients()[i].getMetaInformation().length+ "\n";
-                        rp += "\n";
-                        rp += "\n";
-
-                    }
-                    result.add(new RecipeAfterSearch(r.getId(),r.getTitle(),r.getImage(),r.getLikes()));
-                }
-                Intent intent = new Intent(getApplicationContext(), SearchResult.class);
-                intent.putParcelableArrayListExtra("result",result);
-                startActivity(intent);
+        try {
+            List<Recipe> receitas = call.execute().body();
+            for (Recipe r : receitas) {
+                Log.e("asd", "ADICIO");
+                result.add(new RecipeAfterSearch(r.getId(), r.getTitle(), r.getImage(), r.getLikes()));
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            @Override
-            public void onFailure(Call<List<Recipe>> call, Throwable t) {
-
-            }
-        });
     }
+
+    public ArrayList<RecipeAfterSearch> getResult() {
+        return result;
+    }
+
+    private class WaitForRetrofit extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(Void... params) {
+            callApi(Integer.parseInt(editText2.getText().toString()),editText.getText().toString());
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            Intent intent = new Intent(getApplicationContext(), SearchResult.class);
+            intent.putParcelableArrayListExtra("result",getResult());
+            startActivity(intent);
+        }
+    }
+
 }

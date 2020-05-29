@@ -78,6 +78,10 @@ public class toBuyProduct implements  Parcelable{
         checkBox.setChecked(b);
     }
 
+    public alreadyBoughtProduct ToalreadyBoughtProduct(){
+        return new alreadyBoughtProduct(this.name,this.amout,"");
+    }
+
     @Override
     public String toString() {
         return "Product{" +

@@ -13,4 +13,5 @@ public interface JsonToObject {
                                   @Query("limitLicense") boolean limitLicense, @Query("ranking") Integer ranking, @Query("ignorePantry") boolean ignorePantry);
 
 
+
 }

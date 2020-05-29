@@ -34,7 +34,8 @@ public class Dialog extends AppCompatDialogFragment {
                 if(which==s.length-1){
                     listener.removeAndUpdate();
                 }else{
-
+                    listener.sendToList(which);
+                    listener.removeAndUpdate();
                 }
 
             }

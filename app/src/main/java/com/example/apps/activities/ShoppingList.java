@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.apps.R;
+import com.example.apps.items.alreadyBoughtProduct;
 import com.example.apps.items.toBuyProduct;
 import com.example.apps.utility.CardConstructer;
 import com.example.apps.utility.Dialog;
@@ -24,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceListener {
 
@@ -117,8 +119,19 @@ public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceL
 
     @Override
     public void sendToList(int i) {
-        //Intent intent = new Intent()
-        //setResult();
+        ArrayList<alreadyBoughtProduct> aux = new ArrayList<>();
+        for (toBuyProduct p : shoppingList){
+            if(p.isChecked())
+                aux.add(p.ToalreadyBoughtProduct());
+        }
+        Intent intent = getIntent();
+        intent.putParcelableArrayListExtra("listofp",aux);
+        intent.putExtra("listToFill",i);
+        Log.e("JA ESTA a lista feita",aux.toString());
+        setResult(RESULT_OK,intent);
+        finish();
+
+
     }
 
     @Override

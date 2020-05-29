@@ -1,5 +1,6 @@
 package com.example.apps.utility;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,19 +39,21 @@ public class Adap extends RecyclerView.Adapter<Adap.ExampleViewHolder> {
 
     @NonNull
     @Override
-    public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Adap.ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_view_layout,parent,false);
-        ExampleViewHolder evh = new ExampleViewHolder(v);
+        Log.e("OLA XD",String.valueOf(v==null));
+        Adap.ExampleViewHolder evh = new ExampleViewHolder(v);
         return evh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Adap.ExampleViewHolder holder, int position) {
         alreadyBoughtProduct p = mListaStorage.get(position);
 
-        holder.mName.setText(p.getName());
         holder.mText1.setText(""+p.getAmount());
         holder.mtext2.setText(p.getDate());
+        holder.mName.setText(p.getName());
+
     }
 
     @Override

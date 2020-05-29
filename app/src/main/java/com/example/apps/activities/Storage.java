@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,7 +45,7 @@ public class Storage extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getApplicationContext(), AddProductMaria.class),1);
+                startActivityForResult(new Intent(getApplicationContext(), AddProductToTheList.class),1);
             }
         });
 
@@ -90,4 +91,5 @@ public class Storage extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }

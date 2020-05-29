@@ -33,7 +33,7 @@
             android:label="@string/title_activity_maps"></activity>
         <activity android:name=".activities.Storage" />
         <activity android:name=".activities.ShoppingList" />
-        <activity android:name=".activities.AddProductMaria" />
+        <activity android:name=".activities.AddProductToTheList" />
         <activity android:name=".activities.AddProduct" />
         <activity android:name=".activities.SearchResult"></activity>
         <activity android:name=".activities.RecipeSearch" />

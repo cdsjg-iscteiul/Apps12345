@@ -45,7 +45,8 @@ public class Storage extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getApplicationContext(), AddProductToTheList.class),1);
+
+                startActivityForResult(new Intent(getApplicationContext(), AddProductToTheList.class).putExtra("NotificationNumber",storageList.size()),1);
             }
         });
 
@@ -63,7 +64,7 @@ public class Storage extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data) {
-        storageList.add(storageList.size(), (alreadyBoughtProduct) data.getSerializableExtra("ProductAdded"));
+        storageList.add(storageList.size(), (alreadyBoughtProduct) data.getParcelableExtra("ProductAdded"));
         adapter.notifyItemInserted(storageList.size());
         super.onActivityResult(requestCode, resultCode, data);
 

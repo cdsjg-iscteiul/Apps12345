@@ -2,12 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.apps">
 
-
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permisson.READ_GSERVICES" />
+
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -26,16 +32,20 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyBbbybSUAs1G4_bbbjBFmmKvm3HgLLe2vo" />
+
 
         <activity
+            android:name=".utility.MapOfStoresActivity"
+            android:label="@string/title_activity_map_of_stores"></activity>
+        <activity
             android:name=".utility.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity android:name=".activities.Storage" />
         <activity android:name=".activities.ShoppingList" />
         <activity android:name=".activities.AddProductToTheList" />
         <activity android:name=".activities.AddProduct" />
-        <activity android:name=".activities.SearchResult"></activity>
+        <activity android:name=".activities.SearchResult" />
         <activity android:name=".activities.RecipeSearch" />
         <activity
             android:name=".activities.AddList"
@@ -50,8 +60,8 @@
         <activity android:name=".activities.FirstActivity" />
         <activity android:name=".activities.Login" />
         <activity android:name=".activities.Register" />
-        <receiver android:name=".notifications.Receiver"/>
-    </application>
 
+        <receiver android:name=".notifications.Receiver" />
+    </application>
 
 </manifest>

@@ -74,7 +74,6 @@ public class Storage extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data) {
-        Log.e("asd","ESTOU AQUI XD "+requestCode);
         if(requestCode==50 && resultCode==RESULT_OK) {
             storageList.add(storageList.size(), (alreadyBoughtProduct) data.getParcelableExtra("ProductAdded"));
             adapter.notifyItemInserted(storageList.size());

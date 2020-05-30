@@ -22,13 +22,15 @@ public class Adap extends RecyclerView.Adapter<Adap.ExampleViewHolder> {
 
         public TextView mName;
         public TextView mText1;
-        public TextView mtext2;
+        public TextView mText2;
+        public TextView mtext3;
 
         public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
             mName = itemView.findViewById(R.id.name_of_the_product);
             mText1 = itemView.findViewById(R.id.textView4);
-            mtext2 = itemView.findViewById(R.id.textView5);
+            mText2 = itemView.findViewById(R.id.textView6);
+            mtext3 = itemView.findViewById(R.id.textView5);
 
         }
     }
@@ -52,7 +54,8 @@ public class Adap extends RecyclerView.Adapter<Adap.ExampleViewHolder> {
         alreadyBoughtProduct p = mListaStorage.get(position);
 
         holder.mText1.setText(""+p.getAmount());
-        holder.mtext2.setText(p.getDate());
+        holder.mText2.setText(TypeOfProduct.toString(p.getType()));
+        holder.mtext3.setText(p.getDate());
         holder.mName.setText(p.getName());
 
     }

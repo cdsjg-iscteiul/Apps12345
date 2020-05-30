@@ -4,12 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -20,9 +18,9 @@ import android.widget.NumberPicker;
 import com.example.apps.R;
 import com.example.apps.items.alreadyBoughtProduct;
 import com.example.apps.notifications.Receiver;
+import com.example.apps.utility.TypeOfProduct;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class AddProductToTheList extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
@@ -30,6 +28,7 @@ public class AddProductToTheList extends AppCompatActivity implements DatePicker
     private Button button;
     private EditText editText;
     private NumberPicker numberPicker;
+    private NumberPicker type;
     private ImageView calendar;
     private int year;
     private int month;
@@ -42,10 +41,11 @@ public class AddProductToTheList extends AppCompatActivity implements DatePicker
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_product_maria);
+        setContentView(R.layout.activity_add_product_to_the_list);
         editText = findViewById(R.id.EditTextAddProduct);
         button = findViewById(R.id.buttonAddProduct);
         numberPicker = findViewById(R.id.numberpickeraddproduct);
+        type = findViewById(R.id.typeofproduct2);
         numberPicker.setMaxValue(99);
         calendar = findViewById(R.id.imageView2);
         editText2 = findViewById(R.id.editText2);
@@ -59,7 +59,7 @@ public class AddProductToTheList extends AppCompatActivity implements DatePicker
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alreadyBoughtProduct p = new alreadyBoughtProduct(editText.getText().toString(), numberPicker.getValue(), editText2.getText().toString());
+                alreadyBoughtProduct p = new alreadyBoughtProduct(editText.getText().toString(), numberPicker.getValue(),TypeOfProduct.Type(type.getDisplayedValues()[type.getValue()]), editText2.getText().toString());
                 startAlarm(p,day,month,year);
                 Intent intent = new Intent(getApplicationContext(),Storage.class);
                 intent.putExtra("ProductAdded", p);

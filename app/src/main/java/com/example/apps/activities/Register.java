@@ -43,6 +43,9 @@ public class Register extends AppCompatActivity {
         password = findViewById(R.id.etPassword);
         register = findViewById(R.id.btnRegister);
 
+        getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         fAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();

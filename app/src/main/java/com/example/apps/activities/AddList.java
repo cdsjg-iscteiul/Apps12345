@@ -22,7 +22,7 @@ public class AddList extends AppCompatActivity {
         setContentView(R.layout.activity_add_list);
 
 
-        getSupportActionBar().setTitle("Add Shopping List");
+        getSupportActionBar().setTitle("Add List");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         editText = findViewById(R.id.EditTextAddList);

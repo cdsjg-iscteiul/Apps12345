@@ -34,6 +34,8 @@ public class Login extends AppCompatActivity {
 
 
 
+        getSupportActionBar().setTitle("Login");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         email = (EditText) findViewById(R.id.etEmail);
         password =(EditText)findViewById(R.id.etPassword);
@@ -62,7 +64,6 @@ public class Login extends AppCompatActivity {
         fAuth.signInWithEmailAndPassword(mail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                Toast.makeText(Login.this, "ola", Toast.LENGTH_SHORT).show();
                 if(task.isSuccessful()){
                     Toast.makeText(Login.this, "Success", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Login.this, FirstActivity.class));

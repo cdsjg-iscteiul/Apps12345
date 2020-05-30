@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.apps.R;
 import com.example.apps.items.alreadyBoughtProduct;
@@ -156,11 +157,15 @@ public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceL
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Save:
-                Intent resultIntent = new Intent();
-                resultIntent.putParcelableArrayListExtra("RESULTS", shoppingList);
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
-                return true;
+                if(shoppingList.isEmpty()){
+                    Toast.makeText(this, "NOTHING TO SAVE", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent resultIntent = new Intent();
+                    resultIntent.putParcelableArrayListExtra("RESULTS", shoppingList);
+                    setResult(Activity.RESULT_OK, resultIntent);
+                    finish();
+                    return true;
+                }
 
             default:
                 return super.onOptionsItemSelected(item);

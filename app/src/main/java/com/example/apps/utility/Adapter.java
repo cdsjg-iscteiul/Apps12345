@@ -67,6 +67,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ExampleViewHolder> {
             });
 
         }
+
+
     }
 
     public  Adapter(ArrayList<item> lista){
@@ -94,4 +96,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ExampleViewHolder> {
     public int getItemCount() {
         return mLista.size();
     }
+
+
 }

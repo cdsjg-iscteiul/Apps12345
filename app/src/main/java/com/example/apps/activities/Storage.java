@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.apps.R;
 import com.example.apps.items.alreadyBoughtProduct;
@@ -94,12 +95,17 @@ public class Storage extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Save:
-                Intent resultIntent = new Intent();
-                resultIntent.putParcelableArrayListExtra("RESULTSstorage", storageList);
-                setResult(Activity.RESULT_OK, resultIntent);
-                Log.e("O QUE TYOU A MANDAR ------------>      ", storageList.toString());
-                finish();
-                return true;
+
+                if(storageList.isEmpty()){
+                    Toast.makeText(this, "NOTHING TO SAVE", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent resultIntent = new Intent();
+                    resultIntent.putParcelableArrayListExtra("RESULTSstorage", storageList);
+                    setResult(Activity.RESULT_OK, resultIntent);
+                    Log.e("O QUE TYOU A MANDAR ------------>      ", storageList.toString());
+                    finish();
+                    return true;
+                }
 
 
             default:

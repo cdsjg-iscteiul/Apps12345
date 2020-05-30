@@ -31,8 +31,10 @@
         <activity
             android:name=".utility.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".activities.Storage" />
-        <activity android:name=".activities.ShoppingList" />
+        <activity android:name=".activities.Storage"
+            android:parentActivityName=".activities.FirstActivity"/>
+        <activity android:name=".activities.ShoppingList"
+            android:parentActivityName=".activities.FirstActivity"/>
         <activity android:name=".activities.AddProductToTheList" />
         <activity android:name=".activities.AddProduct" />
         <activity android:name=".activities.SearchResult"></activity>
@@ -48,8 +50,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.FirstActivity" />
-        <activity android:name=".activities.Login" />
-        <activity android:name=".activities.Register" />
+        <activity android:name=".activities.Login"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.Register"
+            android:parentActivityName=".activities.MainActivity"/>
         <receiver android:name=".notifications.Receiver"/>
     </application>
 

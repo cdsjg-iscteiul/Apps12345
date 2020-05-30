@@ -35,8 +35,10 @@
             android:parentActivityName=".activities.FirstActivity"/>
         <activity android:name=".activities.ShoppingList"
             android:parentActivityName=".activities.FirstActivity"/>
-        <activity android:name=".activities.AddProductToTheList" />
-        <activity android:name=".activities.AddProduct" />
+        <activity android:name=".activities.AddProductToTheList"
+            android:parentActivityName=".activities.Storage"/>
+        <activity android:name=".activities.AddProduct"
+            android:parentActivityName=".activities.ShoppingList"/>
         <activity android:name=".activities.SearchResult"></activity>
         <activity android:name=".activities.RecipeSearch" />
         <activity

@@ -43,7 +43,6 @@ public class Storage extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         floatingActionButton = findViewById(R.id.floatingActionButtonM);
-
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +58,6 @@ public class Storage extends AppCompatActivity {
         recyclerview.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         adapter = new Adap(storageList);
-
 
         recyclerview.setLayoutManager(layoutManager);
         recyclerview.setAdapter(adapter);

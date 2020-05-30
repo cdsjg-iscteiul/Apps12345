@@ -100,8 +100,8 @@ public class AdapterRecipes extends RecyclerView.Adapter<AdapterRecipes.ExampleV
         RecipeAfterSearch current = mLista.get(position);
         Log.e("asdasdasd",current.getUrl());
 //        Log.e("-------------",holder.mImageView.getDrawable().toString()+"");
-        Picasso.get().load(current.getUrl()).into(holder.mImageView);
-
+       // Picasso.get().load(current.getUrl()).into(holder.mImageView);
+        holder.mImageView.setImageResource(R.drawable.ic_restaurant);
         holder.id = current.getId();
         holder.mText1.setText(current.getName());
         holder.mtext2.setText("Likes: " + current.getLikes());

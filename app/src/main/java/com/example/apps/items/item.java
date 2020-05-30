@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class item implements Parcelable {
     private int mImageResource;
     private String mText1;
-    private String mText2;
     private ArrayList<alreadyBoughtProduct> arrayComprados;
     private ArrayList<toBuyProduct> arrayComprar;
 
@@ -20,18 +19,15 @@ public class item implements Parcelable {
 
         if(arrayComprar != null){
             this.arrayComprar= arrayComprar;
-            mText2=  String.valueOf(arrayComprar.size());
         }
         if(arrayComprados != null){
             this.arrayComprados= arrayComprados;
-            mText2=  String.valueOf(arrayComprados.size());
         }
     }
 
     protected item(Parcel in) {
         mImageResource = in.readInt();
         mText1 = in.readString();
-        mText2 = in.readString();
     }
 
     public static final Creator<item> CREATOR = new Creator<item>() {
@@ -54,9 +50,7 @@ public class item implements Parcelable {
         return mText1;
     }
 
-    public String getmText2() {
-        return mText2;
-    }
+
 
     public ArrayList<toBuyProduct> getArrayComprar() {
         return arrayComprar;
@@ -83,7 +77,6 @@ public class item implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(mImageResource);
         dest.writeString(mText1);
-        dest.writeString(mText2);
     }
 }
 

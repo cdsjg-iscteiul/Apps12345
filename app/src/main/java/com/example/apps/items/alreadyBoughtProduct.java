@@ -19,11 +19,23 @@ public class alreadyBoughtProduct implements  Parcelable{
         this.expire = expire;
     }
 
+
     protected alreadyBoughtProduct(Parcel in) {
         name = in.readString();
         amount = in.readInt();
-        type = TypeOfProduct.valueOf(in.readString());
         expire = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeInt(amount);
+        dest.writeString(expire);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<alreadyBoughtProduct> CREATOR = new Creator<alreadyBoughtProduct>() {
@@ -54,15 +66,5 @@ public class alreadyBoughtProduct implements  Parcelable{
         return amount;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeInt(amount);
-        dest.writeString(expire);
-    }
 }

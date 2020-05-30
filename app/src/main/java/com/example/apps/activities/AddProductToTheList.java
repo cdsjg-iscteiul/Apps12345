@@ -47,6 +47,9 @@ public class AddProductToTheList extends AppCompatActivity implements DatePicker
         numberPicker = findViewById(R.id.numberpickeraddproduct);
         type = findViewById(R.id.typeofproduct2);
         numberPicker.setMaxValue(99);
+        type.setMinValue(0);
+        type.setMaxValue(4);
+        type.setDisplayedValues(new String[] {"Amount", "Kg", "g", "L","mL"});
         calendar = findViewById(R.id.imageView2);
         editText2 = findViewById(R.id.editText2);
         calendar.setOnClickListener(new View.OnClickListener() {

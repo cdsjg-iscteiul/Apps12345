@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -22,10 +23,10 @@ import com.example.apps.utility.TypeOfProduct;
 
 import java.util.Calendar;
 
-public class AddProductToTheList extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class EditProduct extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
-
-    private Button button;
+    private Button edit;
+    private Button delete;
     private EditText editText;
     private NumberPicker numberPicker;
     private NumberPicker type;
@@ -36,22 +37,31 @@ public class AddProductToTheList extends AppCompatActivity implements DatePicker
     private EditText editText2;
     private AddProductToTheList addNot;
     private int NotificationCounter;
+    private alreadyBoughtProduct p;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_product_to_the_list);
-        editText = findViewById(R.id.EditTextAddProduct);
-        button = findViewById(R.id.buttonAddProduct);
-        numberPicker = findViewById(R.id.numberpickeraddproduct);
-        type = findViewById(R.id.typeofproduct2);
+        setContentView(R.layout.activity_edit_product);
+        editText = findViewById(R.id.editTextAddProduct2);
+        edit = findViewById(R.id.edit);
+        delete = findViewById(R.id.delete);
+        numberPicker = findViewById(R.id.numberpickeraddproduct2);
+        type = findViewById(R.id.typeofproduct3);
         numberPicker.setMaxValue(99);
         type.setMinValue(0);
         type.setMaxValue(4);
         type.setDisplayedValues(new String[] {"Amount", "Kg", "g", "L","mL"});
-        calendar = findViewById(R.id.imageView2);
-        editText2 = findViewById(R.id.editText2);
+        calendar = findViewById(R.id.imageView3);
+        editText2 = findViewById(R.id.editText);
+        p =  getIntent().getParcelableExtra("produto");
+
+        type.setValue(TypeOfProduct.getPosition(p.getType()));
+        numberPicker.setValue(p.getAmount());
+        editText2.setText(p.getDate());
+        editText.setText(p.getName());
+
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { showDate();}
@@ -59,29 +69,42 @@ public class AddProductToTheList extends AppCompatActivity implements DatePicker
 
         NotificationCounter = getIntent().getIntExtra("NotificationNumber",0);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alreadyBoughtProduct p = new alreadyBoughtProduct(editText.getText().toString(), numberPicker.getValue(),TypeOfProduct.Type(type.getDisplayedValues()[type.getValue()]), editText2.getText().toString());
+                p.setAmount(numberPicker.getValue());
+                p.setExpire(editText2.getText().toString());
+                p.setName(editText.getText().toString());
+                p.setType(TypeOfProduct.Type(type.getDisplayedValues()[type.getValue()]));
                 startAlarm(p,day,month,year);
-                Intent intent = new Intent(getApplicationContext(),Storage.class);
-                intent.putExtra("ProductAdded", p);
-
+                Intent intent = getIntent();
+                intent.putExtra("edited", p);
+                Log.e("id","OKET VAMOS LA VE XD "+ getIntent().getIntExtra("id",-1));
+                intent.putExtra("remove","no");
+                intent.putExtra("id2",getIntent().getIntExtra("id",-1));
                 setResult(RESULT_OK,intent);
                 finish();
 
             }
         });
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                intent.putExtra("remove","yes");
+                intent.putExtra("delete",intent.getIntExtra("id",-1));
+                setResult(RESULT_OK,intent);
+                finish();
+            }
+        });
+
     }
 
-  //  public void
+    //  public void
     public void showDate(){
         DatePickerDialog cal = new DatePickerDialog(this, this, Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.YEAR));
         cal.show();
-    }
-    private void changeActivity(){
-        Intent intent = new Intent(this, FirstActivity.class);
     }
 
     @Override
@@ -91,6 +114,7 @@ public class AddProductToTheList extends AppCompatActivity implements DatePicker
         day = dayOfMonth;
         this.month = month;
         this.year = year;
+
     }
 
     private void startAlarm(alreadyBoughtProduct p,int d,int m,int y) {
@@ -103,27 +127,4 @@ public class AddProductToTheList extends AppCompatActivity implements DatePicker
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, NotificationCounter, intent, 0);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
-
-/*
-    public void addAlert(String title, String description, int dayOfMonth, int month, int year, boolean repeat) {
-        String date = dayOfMonth + "/" + month + "/" + year;
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-        calendar.set(Calendar.MONTH, month - 1);
-        calendar.set(Calendar.YEAR, year);
-        long time = calendar.getTimeInMillis();
-        int id = addNot.createNotification(title, description, date);
-        Intent intent = new Intent (getApplicationContext(), Receiver.class);
-        intent.putExtra("title", title).putExtra("key", id).putExtra("description", description);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,id, intent, PendingIntent.FLAG_ONE_SHOT);
-        AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-    }
-    
-    private int createNotification(String title, String name, String date){
-     return 0;
-    }
-
- */
 }
-

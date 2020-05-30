@@ -79,7 +79,7 @@ public class toBuyProduct implements  Parcelable{
     }
 
     public alreadyBoughtProduct ToalreadyBoughtProduct(){
-        return new alreadyBoughtProduct(this.name,this.amout,"");
+        return new alreadyBoughtProduct(this.name,this.amout,getType(),"");
     }
 
     @Override

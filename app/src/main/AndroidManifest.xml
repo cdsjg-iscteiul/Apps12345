@@ -34,9 +34,6 @@
         <activity
             android:name=".utility.MapOfStoresActivity"
             android:label="@string/title_activity_map_of_stores"></activity>
-        <activity
-            android:name=".utility.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
         <activity android:name=".activities.Storage"
             android:parentActivityName=".activities.FirstActivity"/>
         <activity android:name=".activities.ShoppingList"

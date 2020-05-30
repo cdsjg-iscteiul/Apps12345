@@ -32,6 +32,9 @@ public class AddProduct extends AppCompatActivity {
 
         editText = findViewById(R.id.editTextAddProduct);
 
+        getSupportActionBar().setTitle("Add Product");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         button = findViewById(R.id.buttonAddProduct);
         button.setOnClickListener(new View.OnClickListener() {

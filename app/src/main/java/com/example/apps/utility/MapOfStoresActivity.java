@@ -47,7 +47,6 @@ public class MapOfStoresActivity extends FragmentActivity implements OnMapReadyC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_of_stores);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
@@ -72,10 +71,8 @@ public class MapOfStoresActivity extends FragmentActivity implements OnMapReadyC
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == LOCATION_REQUEST_CODE) {
             if (grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted
                 getLastLocation();
             } else {
-                //Permission not granted
             }
         }
     }
@@ -98,19 +95,8 @@ public class MapOfStoresActivity extends FragmentActivity implements OnMapReadyC
 
                     }
                 });
-        Log.e("saiu", currentPos.toString());
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -132,11 +118,9 @@ public class MapOfStoresActivity extends FragmentActivity implements OnMapReadyC
 
         JsonToCoordinates jsonPostApi = retrofit.create(JsonToCoordinates.class);
         Call<PlaceCoordinates> call = jsonPostApi.getPlace(currentPos.latitude + "," + currentPos.longitude, 1500,"supermarket","AIzaSyBbbybSUAs1G4_bbbjBFmmKvm3HgLLe2vo");
-        Log.e("MARIA XD",call.request().url().toString());
         call.enqueue(new Callback<PlaceCoordinates>() {
             @Override
             public void onResponse(Call<PlaceCoordinates> call, Response<PlaceCoordinates> response) {
-                Log.e("MARIA XD","XD");
                 for(PlaceCoordinates.Results r:response.body().getResults()){
                      mMap.addMarker(new MarkerOptions().position(new LatLng(r.getGeometry().getLocation().getLat(),r.getGeometry().getLocation().getLng()))
                              .title(r.getName()));

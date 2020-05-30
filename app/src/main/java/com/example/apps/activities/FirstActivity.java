@@ -159,10 +159,12 @@ public class FirstActivity extends AppCompatActivity {
                 listTosend=ab;
                 int count=0;
                 for(int i=0;i!=items.size();i++){
+                    Log.e("count==data.getIntExtra(listToFill",""+data.getIntExtra("listToFill",-1));
                     if(items.get(i).getmImageResource()==R.drawable.ic_office_material)
                         count++;
+                    if(count==data.getIntExtra("listToFill",0))
+                        adaperClick.onItemClick(i);
                 }
-                adaperClick.onItemClick(count);
             }
         }
 

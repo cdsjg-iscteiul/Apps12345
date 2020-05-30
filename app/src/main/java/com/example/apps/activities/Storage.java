@@ -78,16 +78,18 @@ public class Storage extends AppCompatActivity {
         recyclerview.setAdapter(adapter);
 
         if(getIntent().getParcelableArrayListExtra("listaTransferida")!=null){
+
             ArrayList<alreadyBoughtProduct> aux = getIntent().getParcelableArrayListExtra("listaTransferida");
             for(alreadyBoughtProduct p:aux){
                 storageList.add(p);
                 adapter.notifyItemInserted(storageList.size());
             }
+
         }
     }
     @Override
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data) {
-        Log.e("asd","ESTOU AQUI XD "+requestCode);
+
         if(requestCode==50 && resultCode==RESULT_OK) {
             storageList.add(storageList.size(), (alreadyBoughtProduct) data.getParcelableExtra("ProductAdded"));
             adapter.notifyItemInserted(storageList.size());
@@ -96,21 +98,19 @@ public class Storage extends AppCompatActivity {
         if(requestCode==100 && resultCode==RESULT_OK){
             if(data.getStringExtra("remove").equals("yes")){
                 int counter = 0;
-                Log.e("removido",storageList.size()+"");
+
                 Iterator<alreadyBoughtProduct> i = storageList.iterator();
                 while (i.hasNext()) {
                     alreadyBoughtProduct s = i.next();
                     if(counter==data.getIntExtra("delete",-1)) {
                         i.remove();
-                        Log.e("removido",storageList.size()+"");
+
                         adapter.notifyDataSetChanged();
                     }
                     counter++;
                 }
-                Log.e("removido",storageList.size()+"");
+
             }if(data.getStringExtra("remove").equals("no")){
-                Log.e("id","OKET VAMOS LA VE XD 2 "+ data.getIntExtra("id2",-1));
-                Log.e("id","OKET VAMOS L"+ data.getParcelableExtra("edited").toString());
                 storageList.set(data.getIntExtra("id2",-1),(alreadyBoughtProduct) data.getParcelableExtra("edited"));
                 adapter.notifyItemChanged(data.getIntExtra("id2",-1));
             }
@@ -135,9 +135,10 @@ public class Storage extends AppCompatActivity {
                     Toast.makeText(this, "NOTHING TO SAVE", Toast.LENGTH_SHORT).show();
                 }else {
                     Intent resultIntent = new Intent();
+
                     resultIntent.putParcelableArrayListExtra("RESULTSstorage", storageList);
                     setResult(Activity.RESULT_OK, resultIntent);
-                    Log.e("O QUE TYOU A MANDAR ------------>      ", storageList.toString());
+
                     finish();
                     return true;
                 }

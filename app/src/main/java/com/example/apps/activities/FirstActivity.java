@@ -76,7 +76,7 @@ public class FirstActivity extends AppCompatActivity {
                     startActivityForResult(intent, 4);
                 }else{
                     intent.putParcelableArrayListExtra("listaTransferida",listTosend);
-                    startActivityForResult(intent,10);
+                    startActivityForResult(intent,4);
                 }
             }
         }
@@ -145,28 +145,14 @@ public class FirstActivity extends AppCompatActivity {
             }else if(resultCode == RESULT_OK){
                 ArrayList<alreadyBoughtProduct> ab = data.getParcelableArrayListExtra("listofp");
                 listTosend=ab;
-                Log.e("SIZE D ITEMS",""+items.size());
-                Log.e("Posiçao",""+items.get(1));
                 adaperClick.onItemClick(data.getIntExtra("listToFill",-1));
 
-
-                /*
-                for(int i=0;i!=items.size();i++){
-                    Log.e("count==data.getIntExtra(listToFill",""+data.getIntExtra("listToFill",-1));
-                    if(count==data.getIntExtra("listToFill",0))
-                        adaperClick.onItemClick(i);
-                    if(items.get(i).getmImageResource()==R.drawable.ic_office_material)
-                        count++;
-                }
-
-                 */
             }
         }
 
         if(requestCode ==4){
             if (resultCode == RESULT_OK) {
                 ArrayList<alreadyBoughtProduct> lista = data.getParcelableArrayListExtra("RESULTSstorage");
-                Log.e("RECEBI ESTA MERDA nos produtso --------->  ", lista.toString());
                 items.get(positionTest).setArray1(lista);
                 saveData();
                 mAdapter.notifyDataSetChanged();

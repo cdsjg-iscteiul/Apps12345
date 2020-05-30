@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +21,7 @@ import com.example.apps.utility.Adapter;
 import com.example.apps.R;
 import com.example.apps.items.item;
 import com.example.apps.utility.MapOfStoresActivity;
+import com.example.apps.utility.PositionList;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -48,17 +51,18 @@ public class FirstActivity extends AppCompatActivity {
         @Override
         public void onItemClick(int position) {
             if(items.get(position).getArrayComprar()!= null) {
-                ArrayList<String> listaux = new ArrayList<>();
+                ArrayList<PositionList> listaux = new ArrayList<>();
                 for(item i:items) {
                     if(i.getmImageResource()==R.drawable.ic_office_material)
-                        listaux.add(i.getmText1());
+                        listaux.add(new PositionList(items.indexOf(i),i.getmText1()));
                 }
 
 
 
                 Intent intent = new Intent(FirstActivity.this, ShoppingList.class);
                 intent.putParcelableArrayListExtra("BUNDLE",items.get(position).getArrayComprar());
-                intent.putStringArrayListExtra("sendlist",listaux);
+
+                intent.putParcelableArrayListExtra("sendlist",listaux);
                 positionTest = position;
                 startActivityForResult(intent,3);
 
@@ -141,14 +145,21 @@ public class FirstActivity extends AppCompatActivity {
             }else if(resultCode == RESULT_OK){
                 ArrayList<alreadyBoughtProduct> ab = data.getParcelableArrayListExtra("listofp");
                 listTosend=ab;
-                int count=0;
+                Log.e("SIZE D ITEMS",""+items.size());
+                Log.e("Posiçao",""+items.get(1));
+                adaperClick.onItemClick(data.getIntExtra("listToFill",-1));
+
+
+                /*
                 for(int i=0;i!=items.size();i++){
                     Log.e("count==data.getIntExtra(listToFill",""+data.getIntExtra("listToFill",-1));
-                    if(items.get(i).getmImageResource()==R.drawable.ic_office_material)
-                        count++;
                     if(count==data.getIntExtra("listToFill",0))
                         adaperClick.onItemClick(i);
+                    if(items.get(i).getmImageResource()==R.drawable.ic_office_material)
+                        count++;
                 }
+
+                 */
             }
         }
 
@@ -218,5 +229,6 @@ public class FirstActivity extends AppCompatActivity {
         }
         return  true;
     }
+
 }
 

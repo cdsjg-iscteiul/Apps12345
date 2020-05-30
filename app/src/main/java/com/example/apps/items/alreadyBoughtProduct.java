@@ -68,5 +68,19 @@ public class alreadyBoughtProduct implements  Parcelable{
         return amount;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public void setType(TypeOfProduct type) {
+        this.type = type;
+    }
+
+    public void setExpire(String expire) {
+        this.expire = expire;
+    }
 }

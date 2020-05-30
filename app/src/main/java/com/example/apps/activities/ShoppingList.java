@@ -22,6 +22,7 @@ import com.example.apps.items.alreadyBoughtProduct;
 import com.example.apps.items.toBuyProduct;
 import com.example.apps.utility.CardConstructer;
 import com.example.apps.utility.Dialog;
+import com.example.apps.utility.PositionList;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -36,8 +37,8 @@ public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceL
     private CardConstructer adapter;
     private RecyclerView.LayoutManager layoutManager;
     private FloatingActionButton floatingActionButton;
-    private FloatingActionButton temporario; //PARA ELEMINAR ERA SO PARA TESTE
     private ArrayList<Integer>  listOfSelected;
+    private ArrayList<PositionList> positionLists;
 
 
     @Override
@@ -57,25 +58,6 @@ public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceL
             }
         });
 
-        temporario = findViewById(R.id.floatingActionButton2);
-        temporario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count=0;
-                listOfSelected = new ArrayList<>();
-                for(int i=0;i!=shoppingList.size();i++){
-                    if(shoppingList.get(i).isChecked()){
-                        listOfSelected.add(i);
-                    }
-                }
-                Dialog d = new Dialog();
-                Bundle b = new Bundle();
-
-                b.putStringArrayList("sendlist",listsNames);
-                d.setArguments(b);
-                d.show(getSupportFragmentManager(),"ola");
-            }
-        });
 
         Intent intent = getIntent();
 
@@ -96,9 +78,9 @@ public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceL
     }
 
     private void fillListOfLists() {
-        ArrayList<String> aux = getIntent().getStringArrayListExtra("sendlist");
-        for(String s:aux){
-            listsNames.add(s);
+        positionLists = getIntent().getParcelableArrayListExtra("sendlist");
+        for(PositionList s:positionLists){
+            listsNames.add(s.getName());
         }
     }
 
@@ -114,7 +96,7 @@ public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceL
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.teste, menu);
+        inflater.inflate(R.menu.shoppinglistmenu, menu);
         return true;
     }
 
@@ -127,8 +109,7 @@ public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceL
         }
         Intent intent = getIntent();
         intent.putParcelableArrayListExtra("listofp",aux);
-        intent.putExtra("listToFill",i);
-        Log.e("JA ESTA a lista feita",aux.toString());
+        intent.putExtra("listToFill",positionLists.get(i).getRealPosition());
         setResult(RESULT_OK,intent);
         finish();
 
@@ -166,6 +147,21 @@ public class ShoppingList extends AppCompatActivity implements Dialog.InterfaceL
                     finish();
                     return true;
                 }
+            case R.id.delete:
+                int count=0;
+                listOfSelected = new ArrayList<>();
+                for(int i=0;i!=shoppingList.size();i++){
+                    if(shoppingList.get(i).isChecked()){
+                        listOfSelected.add(i);
+                    }
+                }
+                Dialog d = new Dialog();
+                Bundle b = new Bundle();
+
+                b.putStringArrayList("sendlist",listsNames);
+                d.setArguments(b);
+                d.show(getSupportFragmentManager(),"ola");
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

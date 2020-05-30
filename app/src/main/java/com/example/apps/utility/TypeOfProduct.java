@@ -36,4 +36,20 @@ public enum TypeOfProduct {
                 return "";
         }
     }
+    static public int getPosition(TypeOfProduct t){
+        switch (t){
+            case g:
+                return 2;
+            case amount:
+                return 0;
+            case Kg:
+                return 1;
+            case L:
+                return 3;
+            case mL:
+                return 4;
+            default:
+                return -1;
+        }
+    }
 }

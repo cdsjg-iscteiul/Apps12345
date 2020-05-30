@@ -23,6 +23,7 @@ public class alreadyBoughtProduct implements  Parcelable{
     protected alreadyBoughtProduct(Parcel in) {
         name = in.readString();
         amount = in.readInt();
+        type = TypeOfProduct.valueOf(in.readString());
         expire = in.readString();
     }
 
@@ -30,6 +31,7 @@ public class alreadyBoughtProduct implements  Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeInt(amount);
+        dest.writeString(this.type.name());
         dest.writeString(expire);
     }
 

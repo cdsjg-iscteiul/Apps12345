@@ -19,7 +19,6 @@ import com.example.apps.utility.Adapter;
 import com.example.apps.R;
 import com.example.apps.items.item;
 import com.example.apps.utility.MapOfStoresActivity;
-import com.example.apps.utility.MapsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -48,12 +47,7 @@ public class FirstActivity extends AppCompatActivity {
 
         @Override
         public void onItemClick(int position) {
-            Log.e("TOU ONDE?","-----------> TOU NO ON CLICK" );
-            Log.e("QUE TEM A LISTA?","-----------------------> " + items.get(position).getArrayComprar()  );
             if(items.get(position).getArrayComprar()!= null) {
-                Log.e("TOU ONDE?","-----------> TOU NO ON CLICK DO CARRINHO" );
-
-
                 ArrayList<String> listaux = new ArrayList<>();
                 for(item i:items) {
                     if(i.getmImageResource()==R.drawable.ic_office_material)
@@ -71,26 +65,16 @@ public class FirstActivity extends AppCompatActivity {
             }
 
             if(items.get(position).getArrayComprados()!= null) {
-                Log.e("TOU ONDE?","-----------> TOU NO ON CLICK DA PASTA" );
                 Intent intent = new Intent(FirstActivity.this, Storage.class);
                 intent.putParcelableArrayListExtra("ARRAYCOMPRADOS",items.get(position).getArrayComprados());
                 positionTest = position;
                 if(listTosend==null) {
                     startActivityForResult(intent, 4);
                 }else{
-
                     intent.putParcelableArrayListExtra("listaTransferida",listTosend);
                     startActivityForResult(intent,10);
-
-
                 }
-
             }
-
-
-
-
-
         }
     };
 

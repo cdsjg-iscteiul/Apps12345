@@ -18,6 +18,7 @@ import com.example.apps.items.toBuyProduct;
 import com.example.apps.utility.Adapter;
 import com.example.apps.R;
 import com.example.apps.items.item;
+import com.example.apps.utility.MapOfStoresActivity;
 import com.example.apps.utility.MapsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
@@ -158,10 +159,12 @@ public class FirstActivity extends AppCompatActivity {
                 listTosend=ab;
                 int count=0;
                 for(int i=0;i!=items.size();i++){
+                    Log.e("count==data.getIntExtra(listToFill",""+data.getIntExtra("listToFill",-1));
                     if(items.get(i).getmImageResource()==R.drawable.ic_office_material)
                         count++;
+                    if(count==data.getIntExtra("listToFill",0))
+                        adaperClick.onItemClick(i);
                 }
-                adaperClick.onItemClick(count);
             }
         }
 
@@ -220,7 +223,7 @@ public class FirstActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.find_supermarkets:
-                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                startActivity(new Intent(getApplicationContext(), MapOfStoresActivity.class));
                 return  true;
 
             case R.id.item3:

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Apps</string>
+    <string name="app_name">PantryManagerApp</string>
     <string name="name">Name</string>
     <string name="add">ADD</string>
     <string name="new_list_name">New List name</string>
